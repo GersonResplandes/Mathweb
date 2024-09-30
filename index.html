@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Trigonometria</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="conteudo">
+            <div id="opcoes">
+                <label for="opcoesInput">Qual desses conteúdos deseja visualizar:</label>
+                <input id="opcoesInput" type="text" oninput="mostrarFormulario()" placeholder="Pesquisa...">
+            </div>
+
+            <div class="form-container" id="formulario_trianguloRetangulo" style="display: none">
+                <form id="trianguloRetanguloForm">
+                    <img src="trianguloRetangulo.png" alt="Triângulo Retângulo" />
+                    <p>Forneça no mínimo dois valores.</p>
+                    <br />
+                    <label for="angulo">Valor do ângulo α do triângulo retângulo:</label>
+                    <input type="number" id="angulo" />
+                    <label for="adjacente">Valor do cateto adjacente:</label>
+                    <input type="number" id="adjacente" />
+                    <label for="oposto">Valor do cateto oposto:</label>
+                    <input type="number" id="oposto" />
+                    <label for="hipotenusa">Valor da hipotenusa:</label>
+                    <input type="number" id="hipotenusa" />
+                    <button type="button" onclick="identificarFormula()">Calcular</button>
+                    <div id="resultadotriangulo"></div>
+                </form>
+            </div>
+
+            <div class="form-container" id="formulario_leiCossenos" style="display: none">
+                <div id="semladooposto" style="display: none">
+                    <h1>Trigonometria</h1>
+                    <img src="exemplo02.png" alt="Exemplo sem lado oposto" />
+                    <hr />
+                    <label for="ladoa">Digite o valor do lado A:</label>
+                    <input type="number" id="ladoa" />
+                    <label for="ladob">Digite o valor do lado B:</label>
+                    <input type="number" id="ladob" />
+                    <label for="angulo_graus">Digite o valor do Ângulo:</label>
+                    <input type="number" id="angulo_graus" />
+                    <button type="button" onclick="calcularSemLadoOposto()">Calcular</button>
+                    <div id="resultado"></div>
+                </div>
+
+                <div id="comladooposto" style="display: none">
+                    <h1>Trigonometria</h1>
+                    <img src="exemplo01.png" alt="Exemplo com lado oposto" />
+                    <hr />
+                    <label for="ladoa_oposto">Digite o valor de um lado adjacente ao ângulo:</label>
+                    <input type="number" id="ladoa_oposto" />
+                    <label for="ladob_oposto">Digite o valor do outro lado oposto ao ângulo:</label>
+                    <input type="number" id="ladob_oposto" />
+                    <label for="angulo_oposto_graus">Digite o valor do Ângulo:</label>
+                    <input type="number" id="angulo_oposto_graus" />
+                    <button type="button" onclick="calcularComLadoOposto()">Calcular</button>
+                    <div id="resultado_oposto"></div>
+                </div>
+            </div>
+
+            <div class="form-container" id="formulario_leiSenos" style="display: none">
+                <img src="Captura de tela 2024-05-23 184506.png" alt="Lei dos Senos" />
+                <hr />
+                <label for="anguloA">Digite a medida do primeiro ângulo: </label>
+                <input type="number" id="anguloA" />
+                <label for="anguloB">Digite a medida do segundo ângulo: </label>
+                <input type="number" id="anguloB" />
+                <button type="button" onclick="terceirolado()">Enviar</button>
+                <div id="enviarSeno3"></div>
+                <div class="form-container" id="restoformulario" style="display: none">
+                    <label for="lado_conhecido">Digite o valor do lado conhecido:</label>
+                    <input type="number" id="lado_conhecido" /><br />
+                    <label for="angulox1">Qual ângulo está oposto ao lado fornecido?</label>
+                    <input type="number" id="angulox1" placeholder="30°, 45°, 60°, 120°">
+                    <label for="anguloladofornecido">Qual ângulo está oposto ao lado que você deseja encontrar?</label>
+                    <select id="anguloladofornecido">
+                        <option value="angulo1">Primeiro ângulo</option>
+                        <option value="angulo2">Segundo ângulo</option>
+                        <option value="terceiro_angulo">Terceiro ângulo</option>
+                    </select>
+                    <button type="button" onclick="calcularSeno()">Calcular</button>
+                    <div id="resultado_Seno"></div>
+                </div>
+            </div>
+
+            <div class="form-container" id="formulario_termometria" style="display: none">
+                <h2>Conversor de Temperatura</h2>
+                <label for="conversor">Escolha uma conversão de temperatura:</label>
+                <select id="conversor" onchange="selecionarConversao()">
+                    <option value="">Selecione...</option>
+                    <option value="celsiusToKelvin">Celsius (°C) para Kelvin (K)</option>
+                    <option value="kelvinToCelsius">Kelvin (K) para Celsius (°C)</option>
+                    <option value="celsiusToFahrenheit">Celsius (°C) para Fahrenheit (°F)</option>
+                    <option value="fahrenheitToCelsius">Fahrenheit (°F) para Celsius (°C)</option>
+                    <option value="kelvinToFahrenheit">Kelvin (K) para Fahrenheit (°F)</option>
+                    <option value="fahrenheitToKelvin">Fahrenheit (°F) para Kelvin (K)</option>
+                </select>
+
+                <div id="formulario" style="display: none;">
+                    <form id="formConversao" onsubmit="return false;">
+                        <div id="inputs"></div>
+                        <button type="button" onclick="converterTemperatura()">Converter</button>
+                    </form>
+                </div>
+                <div id="resultado-termometria"></div>
+            </div>
+
+            <div class="form-container" id="funcoes" style="display: none">
+                <h1>Seletor de Funções Matemáticas</h1>
+                <label for="seletorf">Selecione uma função:</label>
+                <select id="seletorf" onchange="mostrarDiv()">
+                    <option value="">Selecione...</option>
+                    <option value="primeirograu">Função do primeiro grau ou função afim</option>
+                    <option value="segundograu">Função do segundo grau</option>
+                    <option value="funcaoquadratica">Função quadrática</option>
+                    <option value="funcaoexponencial">Função exponencial</option>
+                    <option value="funcaologaritmica">Função logarítmica</option>
+                    <option value="funcaotrigonometrica">Função trigonométrica</option>
+                    <option value="funcaopolimonial">Função polinomial</option>
+                    <option value="funcaoirracional">Função irracional</option>
+                    <option value="funcaotranscendental">Função transcendental</option>
+                    <option value="funcaoracional">Função racional</option>
+                </select>
+
+                <div class="form-container" id="segundograu" style="display: none">
+                    <label for="a">Digite o valor de a:</label>
+                    <input type="number" id="a">
+                    <label for="b">Digite o valor de b:</label>
+                    <input type="number" id="b">
+                    <label for="c">Digite o valor de c:</label>
+                    <input type="number" id="c">
+                    <button type="button" onclick="segundograu()">Calcular</button>
+                    <div id="resutfuncao"></div>
+                </div>
+            </div>
+
+            <div class="form-container" id="expressaoMatematica">
+                <p id="inf1">Informações importantes:</p><br>
+                <p id="inf2">Divisão: use o sinal '/'</p>
+                <p id="inf3">Elevação ao quadrado, cubo, etc.: use '^'</p>
+                <p id="inf4">Multiplicação: use '*'</p>
+                <p id="inf5">Raiz: use o símbolo '√' (<button onclick="copiarSimbolo()">Copiar símbolo</button>)</p>
+                <label for="expressao">Digite sua expressão matemática:</label>
+                <input type="text" id="expressao" placeholder="Ex: 2 + 3 * [4 + 2 * (3^2 - 1)]">
+                <button type="button" onclick="calcexpressao()">Calcular</button>
+                <div id="calcexpressaor"></div>
+            </div>
+
+            <img src="logo (2).png" alt="Logo" style="display: block" id="img" />
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
