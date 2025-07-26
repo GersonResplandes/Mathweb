@@ -712,23 +712,29 @@ export const formatarValorTrigonometrico = (
   angulo: number,
   tipo: "seno" | "cosseno" | "tangente",
   usarFracao: boolean = true
-): { valor: string; explicacao?: string } => {
+): {
+  valor: string;
+  explicacao?: string;
+  fracao?: { numerador: string; denominador: string };
+} => {
   if (usarFracao) {
-    const resultadoExato = getValorTrigonometricoExato(angulo, tipo);
-    if (resultadoExato.valor) {
+    const valorExato = getValorTrigonometricoExato(angulo, tipo);
+    if (valorExato.valor) {
+      // Se tem valor exato, retornar dados estruturados para o componente
+      const [numerador, denominador] = valorExato.valor.split("/");
       return {
-        valor: formatarFracao(resultadoExato.valor),
-        explicacao: resultadoExato.explicacao,
-      };
-    } else {
-      return {
-        valor: formatarNumero(valor),
-        explicacao: resultadoExato.explicacao,
+        valor: valorExato.valor,
+        explicacao: valorExato.explicacao,
+        fracao: {
+          numerador: numerador || valorExato.valor,
+          denominador: denominador || "1",
+        },
       };
     }
   }
 
   return {
     valor: formatarNumero(valor),
+    explicacao: getValorTrigonometricoExato(angulo, tipo).explicacao,
   };
 };
