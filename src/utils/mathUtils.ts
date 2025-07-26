@@ -174,12 +174,12 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`🔢 Cálculo do cateto adjacente:`);
     passos.push(`   tg(${angulo}°) = ${oposto} / adjacente`);
     passos.push(`   adjacente = ${oposto} / tg(${angulo}°)`);
-    passos.push(`   adjacente = ${oposto} / ${tangenteFormatada}`);
+    passos.push(`   adjacente = ${oposto} / ${tangenteFormatada.valor}`);
     passos.push(`   adjacente = ${formatarNumero(adjacenteCalculado)}`);
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(`   sen(${angulo}°) = ${oposto} / hipotenusa`);
     passos.push(`   hipotenusa = ${oposto} / sen(${angulo}°)`);
-    passos.push(`   hipotenusa = ${oposto} / ${senoFormatado}`);
+    passos.push(`   hipotenusa = ${oposto} / ${senoFormatado.valor}`);
     passos.push(`   hipotenusa = ${formatarNumero(hipotenusaCalculada)}`);
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
@@ -246,7 +246,7 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`   oposto = ${formatarNumero(opostoCalculado)}`);
     passos.push(`🔢 Cálculo do ângulo α:`);
     passos.push(
-      `   cos(α) = ${adjacente} / ${hipotenusa} = ${cossenoFormatado}`
+      `   cos(α) = ${adjacente} / ${hipotenusa} = ${cossenoFormatado.valor}`
     );
     passos.push(`   α = cos⁻¹(${adjacente} / ${hipotenusa})`);
     passos.push(`   α = cos⁻¹(${formatarNumero(adjacente! / hipotenusa!)})`);
