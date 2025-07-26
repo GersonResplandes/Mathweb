@@ -125,7 +125,9 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`🔢 Cálculo do cateto oposto:`);
     passos.push(`   tg(${angulo}°) = oposto / ${adjacente}`);
     passos.push(`   oposto = ${adjacente} × tg(${angulo}°)`);
-    passos.push(`   oposto = ${adjacente} × ${tangenteFormatada.valor}`);
+    passos.push(
+      `   oposto = ${adjacente} × [FRACAO:${tangenteFormatada.valor}]`
+    );
     passos.push(`   oposto = ${formatarNumero(opostoCalculado)}`);
 
     // Adicionar explicação se o ângulo não tem valor exato
@@ -139,7 +141,9 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(`   cos(${angulo}°) = ${adjacente} / hipotenusa`);
     passos.push(`   hipotenusa = ${adjacente} / cos(${angulo}°)`);
-    passos.push(`   hipotenusa = ${adjacente} / ${cossenoFormatado.valor}`);
+    passos.push(
+      `   hipotenusa = ${adjacente} / [FRACAO:${cossenoFormatado.valor}]`
+    );
     passos.push(`   hipotenusa = ${formatarNumero(hipotenusaCalculada)}`);
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
@@ -174,12 +178,14 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`🔢 Cálculo do cateto adjacente:`);
     passos.push(`   tg(${angulo}°) = ${oposto} / adjacente`);
     passos.push(`   adjacente = ${oposto} / tg(${angulo}°)`);
-    passos.push(`   adjacente = ${oposto} / ${tangenteFormatada.valor}`);
+    passos.push(
+      `   adjacente = ${oposto} / [FRACAO:${tangenteFormatada.valor}]`
+    );
     passos.push(`   adjacente = ${formatarNumero(adjacenteCalculado)}`);
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(`   sen(${angulo}°) = ${oposto} / hipotenusa`);
     passos.push(`   hipotenusa = ${oposto} / sen(${angulo}°)`);
-    passos.push(`   hipotenusa = ${oposto} / ${senoFormatado.valor}`);
+    passos.push(`   hipotenusa = ${oposto} / [FRACAO:${senoFormatado.valor}]`);
     passos.push(`   hipotenusa = ${formatarNumero(hipotenusaCalculada)}`);
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
@@ -246,7 +252,7 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`   oposto = ${formatarNumero(opostoCalculado)}`);
     passos.push(`🔢 Cálculo do ângulo α:`);
     passos.push(
-      `   cos(α) = ${adjacente} / ${hipotenusa} = ${cossenoFormatado.valor}`
+      `   cos(α) = ${adjacente} / ${hipotenusa} = [FRACAO:${cossenoFormatado.valor}]`
     );
     passos.push(`   α = cos⁻¹(${adjacente} / ${hipotenusa})`);
     passos.push(`   α = cos⁻¹(${formatarNumero(adjacente! / hipotenusa!)})`);
@@ -283,7 +289,9 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`   adjacente = √${hipotenusa! ** 2 - oposto! ** 2}`);
     passos.push(`   adjacente = ${formatarNumero(adjacenteCalculado)}`);
     passos.push(`🔢 Cálculo do ângulo α:`);
-    passos.push(`   sen(α) = ${oposto} / ${hipotenusa} = ${senoFormatado}`);
+    passos.push(
+      `   sen(α) = ${oposto} / ${hipotenusa} = [FRACAO:${senoFormatado.valor}]`
+    );
     passos.push(`   α = sen⁻¹(${oposto} / ${hipotenusa})`);
     passos.push(`   α = sen⁻¹(${formatarNumero(oposto! / hipotenusa!)})`);
     passos.push(`   α = ${formatarNumero(anguloCalculado)}°`);
@@ -324,12 +332,14 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`🔢 Cálculo do cateto oposto:`);
     passos.push(`   sen(${angulo}°) = oposto / ${hipotenusa}`);
     passos.push(`   oposto = ${hipotenusa} × sen(${angulo}°)`);
-    passos.push(`   oposto = ${hipotenusa} × ${senoFormatado}`);
+    passos.push(`   oposto = ${hipotenusa} × [FRACAO:${senoFormatado.valor}]`);
     passos.push(`   oposto = ${formatarNumero(opostoCalculado)}`);
     passos.push(`🔢 Cálculo do cateto adjacente:`);
     passos.push(`   cos(${angulo}°) = adjacente / ${hipotenusa}`);
     passos.push(`   adjacente = ${hipotenusa} × cos(${angulo}°)`);
-    passos.push(`   adjacente = ${hipotenusa} × ${cossenoFormatado}`);
+    passos.push(
+      `   adjacente = ${hipotenusa} × [FRACAO:${cossenoFormatado.valor}]`
+    );
     passos.push(`   adjacente = ${formatarNumero(adjacenteCalculado)}`);
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);

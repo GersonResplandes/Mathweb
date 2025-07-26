@@ -82,53 +82,60 @@ const TrianguloRetangulo: React.FC = () => {
 
   // Função para renderizar passos com frações
   const renderizarPasso = (passo: string) => {
-    // Verificar se o passo contém uma fração trigonométrica
-    if (passo.includes("tg(") && passo.includes("/")) {
-      // Extrair valores da fração
-      const match = passo.match(/tg\((\d+)°\)\s*=\s*(\d+)\s*\/\s*(\d+)/);
+    // Verificar se o passo contém marcador de fração
+    if (passo.includes("[FRACAO:")) {
+      const match = passo.match(/\[FRACAO:(.*?)\]/);
       if (match) {
-        const [, angulo, numerador, denominador] = match;
-        return (
-          <div key={passo} className="passo-calculo">
-            <span>tg({angulo}°) = </span>
-            <FracaoInteligente
-              numerador={numerador}
-              denominador={denominador}
-            />
-          </div>
-        );
-      }
-    }
+        const fracaoHTML = match[1];
 
-    if (passo.includes("sen(") && passo.includes("/")) {
-      const match = passo.match(/sen\((\d+)°\)\s*=\s*(\d+)\s*\/\s*(\d+)/);
-      if (match) {
-        const [, angulo, numerador, denominador] = match;
-        return (
-          <div key={passo} className="passo-calculo">
-            <span>sen({angulo}°) = </span>
-            <FracaoInteligente
-              numerador={numerador}
-              denominador={denominador}
-            />
-          </div>
-        );
-      }
-    }
+        // Extrair numerador e denominador do HTML da fração
+        if (fracaoHTML.includes('class="fracao"')) {
+          // Fração simples
+          const numeradorMatch = fracaoHTML.match(
+            /<span class="numerador">(.*?)<\/span>/
+          );
+          const denominadorMatch = fracaoHTML.match(
+            /<span class="denominador">(.*?)<\/span>/
+          );
 
-    if (passo.includes("cos(") && passo.includes("/")) {
-      const match = passo.match(/cos\((\d+)°\)\s*=\s*(\d+)\s*\/\s*(\d+)/);
-      if (match) {
-        const [, angulo, numerador, denominador] = match;
-        return (
-          <div key={passo} className="passo-calculo">
-            <span>cos({angulo}°) = </span>
-            <FracaoInteligente
-              numerador={numerador}
-              denominador={denominador}
-            />
-          </div>
-        );
+          if (numeradorMatch && denominadorMatch) {
+            const numerador = numeradorMatch[1];
+            const denominador = denominadorMatch[1];
+
+            return (
+              <div key={passo} className="passo-calculo">
+                <span>{passo.replace(/\[FRACAO:.*?\]/, "")}</span>
+                <FracaoInteligente
+                  numerador={numerador}
+                  denominador={denominador}
+                />
+              </div>
+            );
+          }
+        } else if (fracaoHTML.includes('class="fracao-raiz"')) {
+          // Fração com raiz
+          const raizMatch = fracaoHTML.match(
+            /<span class="raiz-valor">(.*?)<\/span>/
+          );
+          const denominadorMatch = fracaoHTML.match(
+            /<span class="denominador">(.*?)<\/span>/
+          );
+
+          if (raizMatch && denominadorMatch) {
+            const raiz = raizMatch[1];
+            const denominador = denominadorMatch[1];
+
+            return (
+              <div key={passo} className="passo-calculo">
+                <span>{passo.replace(/\[FRACAO:.*?\]/, "")}</span>
+                <FracaoInteligente
+                  numerador={`√${raiz}`}
+                  denominador={denominador}
+                />
+              </div>
+            );
+          }
+        }
       }
     }
 
