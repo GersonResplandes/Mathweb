@@ -76,45 +76,7 @@ const TrianguloRetangulo: React.FC = () => {
       hipotenusa: "",
     });
     setResultado(null);
-  };
-
-  // Função para extrair valores dos passos HTML
-  const extrairValorDoPasso = (passos: string[], texto: string): string => {
-    // Procurar no passo que contém "Resultados finais"
-    const passoResultados = passos.find((p) =>
-      p.includes("📊 Resultados finais:")
-    );
-    if (!passoResultados) {
-      console.log("Passo de resultados não encontrado");
-      return "N/A";
-    }
-
-    // Remover tags HTML e quebrar em linhas
-    const textoLimpo = passoResultados
-      .replace(/<br>/g, "\n")
-      .replace(/<[^>]*>/g, "");
-    const linhas = textoLimpo.split("\n");
-
-    // Procurar a linha que contém o texto desejado
-    const linha = linhas.find((l) => l.includes(texto));
-    if (!linha) {
-      console.log("Linha não encontrada para:", texto);
-      return "N/A";
-    }
-
-    // Extrair o valor após o "=" de forma mais simples
-    const partes = linha.split("=");
-    if (partes.length >= 2) {
-      // Pegar tudo após o "=" e antes do próximo "•" ou fim da linha
-      let valor = partes[1].trim();
-      // Remover qualquer "•" que possa estar no início
-      valor = valor.replace(/^•\s*/, "");
-      // Remover qualquer texto após o valor (como "• Ângulo β")
-      valor = valor.split("•")[0].trim();
-      return valor;
-    }
-
-    return "N/A";
+    setErro("");
   };
 
   return (
@@ -242,27 +204,56 @@ const TrianguloRetangulo: React.FC = () => {
                 <div className="mt-3">
                   <h6 className="text-success mb-2">📝 Passos do Cálculo:</h6>
                   <div className="passos-container">
-                    {resultado.passos.map((passo, index) => {
-                      // Determinar a classe CSS baseada no conteúdo
-                      let className = "passo-calculo";
-                      if (
-                        passo.includes("📐") ||
-                        passo.includes("🔢") ||
-                        passo.includes("📊")
-                      ) {
-                        className += " titulo-secao";
-                      } else if (passo.includes("ℹ️")) {
-                        className += " explicacao";
+                    {(() => {
+                      const secoes = [];
+                      let secaoAtual = [];
+                      let tituloSecao = "";
+
+                      for (let i = 0; i < resultado.passos.length; i++) {
+                        const passo = resultado.passos[i];
+
+                        // Verificar se é um título de seção (começa com emoji)
+                        if (passo.match(/^[📐🔢📊ℹ️]/)) {
+                          // Se já temos uma seção em andamento, salvá-la
+                          if (secaoAtual.length > 0) {
+                            secoes.push({
+                              titulo: tituloSecao,
+                              passos: secaoAtual,
+                            });
+                          }
+
+                          // Iniciar nova seção
+                          tituloSecao = passo;
+                          secaoAtual = [];
+                        } else {
+                          // Adicionar passo à seção atual
+                          secaoAtual.push(passo);
+                        }
                       }
 
-                      return (
-                        <div
-                          key={index}
-                          className={className}
-                          dangerouslySetInnerHTML={{ __html: passo }}
-                        />
-                      );
-                    })}
+                      // Adicionar a última seção
+                      if (secaoAtual.length > 0) {
+                        secoes.push({
+                          titulo: tituloSecao,
+                          passos: secaoAtual,
+                        });
+                      }
+
+                      return secoes.map((secao, index) => (
+                        <div key={index} className="secao-calculo mb-3">
+                          <h6 className="titulo-secao mb-2">{secao.titulo}</h6>
+                          <div className="passos-secao">
+                            {secao.passos.map((passo, passoIndex) => (
+                              <div
+                                key={passoIndex}
+                                className="passo-calculo"
+                                dangerouslySetInnerHTML={{ __html: passo }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      ));
+                    })()}
                   </div>
                 </div>
               )}
@@ -276,13 +267,19 @@ const TrianguloRetangulo: React.FC = () => {
                       <div className="d-flex justify-content-between">
                         <span>Ângulo α:</span>
                         <strong className="text-primary">
-                          {extrairValorDoPasso(resultado.passos, "Ângulo α")}
+                          {resultado.passos
+                            .find((p) => p.includes("Ângulo α ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Ângulo β:</span>
                         <strong className="text-primary">
-                          {extrairValorDoPasso(resultado.passos, "Ângulo β")}
+                          {resultado.passos
+                            .find((p) => p.includes("Ângulo β ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                     </div>
@@ -290,25 +287,28 @@ const TrianguloRetangulo: React.FC = () => {
                       <div className="d-flex justify-content-between">
                         <span>Adjacente:</span>
                         <strong className="text-success">
-                          {extrairValorDoPasso(
-                            resultado.passos,
-                            "Cateto Adjacente"
-                          )}
+                          {resultado.passos
+                            .find((p) => p.includes("Cateto Adjacente ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Oposto:</span>
                         <strong className="text-success">
-                          {extrairValorDoPasso(
-                            resultado.passos,
-                            "Cateto Oposto"
-                          )}
+                          {resultado.passos
+                            .find((p) => p.includes("Cateto Oposto ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Hipotenusa:</span>
                         <strong className="text-success">
-                          {extrairValorDoPasso(resultado.passos, "Hipotenusa")}
+                          {resultado.passos
+                            .find((p) => p.includes("Hipotenusa ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                     </div>

@@ -204,36 +204,6 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para títulos de seções */
-.passo-calculo:has(span:first-child:contains("📐")),
-.passo-calculo:has(span:first-child:contains("🔢")),
-.passo-calculo:has(span:first-child:contains("📊")),
-.passo-calculo:has(span:first-child:contains("ℹ️")) {
-  background: #e3f2fd;
-  border-left: 4px solid #2196f3;
-  font-weight: 600;
-  font-family: inherit;
-  font-size: 1rem;
-}
-
-/* Estilo específico para títulos */
-.passo-calculo.titulo-secao {
-  background: #e3f2fd;
-  border-left: 4px solid #2196f3;
-  font-weight: 600;
-  font-family: inherit;
-  font-size: 1rem;
-  color: #1976d2;
-}
-
-/* Estilo para explicações */
-.passo-calculo.explicacao {
-  background: #fff3e0;
-  border-left: 4px solid #ff9800;
-  font-style: italic;
-  color: #e65100;
-}
-
 .passo-calculo:last-child {
   margin-bottom: 0;
 }
@@ -556,4 +526,46 @@
     left: -6px;
     font-size: 1em;
   }
+}
+
+/* Seções de cálculo */
+.secao-calculo {
+  border-left: 4px solid #007bff;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  background: #f8f9fa;
+  border-radius: 0 8px 8px 0;
+  padding: 15px;
+}
+
+.titulo-secao {
+  color: #007bff;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.passos-secao {
+  margin-left: 10px;
+}
+
+.passos-secao .passo-calculo {
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  border-left: 3px solid #e9ecef;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.passos-secao .passo-calculo:last-child {
+  margin-bottom: 0;
+}
+
+/* Melhorar o estilo das frações dentro das seções */
+.passos-secao .fracao,
+.passos-secao .fracao-raiz {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 2px;
 }
