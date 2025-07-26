@@ -113,15 +113,33 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(
       `📐 Dados fornecidos: Ângulo = ${angulo}°, Adjacente = ${adjacente}`
     );
+
+    // Adicionar explicação se o ângulo não tem valor exato
+    if (
+      tangenteFormatada.explicacao &&
+      !tangenteFormatada.valor.includes("fracao")
+    ) {
+      passos.push(`ℹ️ ${tangenteFormatada.explicacao}`);
+    }
+
     passos.push(`🔢 Cálculo do cateto oposto:`);
     passos.push(`   tg(${angulo}°) = oposto / ${adjacente}`);
     passos.push(`   oposto = ${adjacente} × tg(${angulo}°)`);
-    passos.push(`   oposto = ${adjacente} × ${tangenteFormatada}`);
+    passos.push(`   oposto = ${adjacente} × ${tangenteFormatada.valor}`);
     passos.push(`   oposto = ${formatarNumero(opostoCalculado)}`);
+
+    // Adicionar explicação se o ângulo não tem valor exato
+    if (
+      cossenoFormatado.explicacao &&
+      !cossenoFormatado.valor.includes("fracao")
+    ) {
+      passos.push(`ℹ️ ${cossenoFormatado.explicacao}`);
+    }
+
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(`   cos(${angulo}°) = ${adjacente} / hipotenusa`);
     passos.push(`   hipotenusa = ${adjacente} / cos(${angulo}°)`);
-    passos.push(`   hipotenusa = ${adjacente} / ${cossenoFormatado}`);
+    passos.push(`   hipotenusa = ${adjacente} / ${cossenoFormatado.valor}`);
     passos.push(`   hipotenusa = ${formatarNumero(hipotenusaCalculada)}`);
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
@@ -466,7 +484,9 @@ export const calcularFuncaoSegundoGrau = (
 };
 
 // Tabela de valores trigonométricos exatos para ângulos comuns
-const VALORES_TRIGONOMETRICOS_EXATOS = {
+const VALORES_TRIGONOMETRICOS_EXATOS: {
+  [key: number]: { seno: string; cosseno: string; tangente: string };
+} = {
   0: { seno: "0", cosseno: "1", tangente: "0" },
   30: { seno: "1/2", cosseno: "√3/2", tangente: "1/√3" },
   45: { seno: "√2/2", cosseno: "√2/2", tangente: "1" },
@@ -490,31 +510,148 @@ const VALORES_TRIGONOMETRICOS_EXATOS = {
 export const getValorTrigonometricoExato = (
   angulo: number,
   tipo: "seno" | "cosseno" | "tangente"
-): string | null => {
+): { valor: string | null; explicacao: string } => {
   // Normalizar ângulo para 0-360
   const anguloNormalizado = ((angulo % 360) + 360) % 360;
 
   // Verificar se é um ângulo com valor exato conhecido
   if (VALORES_TRIGONOMETRICOS_EXATOS[anguloNormalizado]) {
-    return VALORES_TRIGONOMETRICOS_EXATOS[anguloNormalizado][tipo];
+    return {
+      valor: VALORES_TRIGONOMETRICOS_EXATOS[anguloNormalizado][tipo],
+      explicacao: `Ângulo ${angulo}° tem valor trigonométrico exato conhecido.`,
+    };
   }
 
   // Verificar ângulos complementares (90 - angulo)
   const complementar = 90 - anguloNormalizado;
   if (VALORES_TRIGONOMETRICOS_EXATOS[complementar]) {
+    let valorExato: string;
     switch (tipo) {
       case "seno":
-        return VALORES_TRIGONOMETRICOS_EXATOS[complementar].cosseno;
+        valorExato = VALORES_TRIGONOMETRICOS_EXATOS[complementar].cosseno;
+        break;
       case "cosseno":
-        return VALORES_TRIGONOMETRICOS_EXATOS[complementar].seno;
+        valorExato = VALORES_TRIGONOMETRICOS_EXATOS[complementar].seno;
+        break;
       case "tangente":
-        return VALORES_TRIGONOMETRICOS_EXATOS[complementar].tangente === "∞"
-          ? "∞"
-          : `1/${VALORES_TRIGONOMETRICOS_EXATOS[complementar].tangente}`;
+        valorExato =
+          VALORES_TRIGONOMETRICOS_EXATOS[complementar].tangente === "∞"
+            ? "∞"
+            : `1/${VALORES_TRIGONOMETRICOS_EXATOS[complementar].tangente}`;
+        break;
+    }
+    return {
+      valor: valorExato,
+      explicacao: `Usando relação complementar: ${tipo}(${angulo}°) = ${
+        tipo === "tangente" ? "1/tg" : tipo === "seno" ? "cos" : "sen"
+      }(${complementar}°)`,
+    };
+  }
+
+  // Verificar ângulos suplementares (180 - angulo)
+  const suplementar = 180 - anguloNormalizado;
+  if (VALORES_TRIGONOMETRICOS_EXATOS[suplementar]) {
+    let valorExato: string;
+    switch (tipo) {
+      case "seno":
+        valorExato = VALORES_TRIGONOMETRICOS_EXATOS[suplementar].seno;
+        break;
+      case "cosseno":
+        valorExato = `-${VALORES_TRIGONOMETRICOS_EXATOS[suplementar].cosseno}`;
+        break;
+      case "tangente":
+        valorExato = `-${VALORES_TRIGONOMETRICOS_EXATOS[suplementar].tangente}`;
+        break;
+    }
+    return {
+      valor: valorExato,
+      explicacao: `Usando relação suplementar: ${tipo}(${angulo}°) = ${
+        tipo === "cosseno" || tipo === "tangente" ? "-" : ""
+      }${tipo}(${suplementar}°)`,
+    };
+  }
+
+  // Verificar ângulos relacionados especiais
+  const angulosRelacionados = [
+    {
+      angulo: 15,
+      relacionado: 30,
+      fator: 0.5,
+      explicacao: "15° = 30°/2 (usando fórmula do ângulo metade)",
+    },
+    {
+      angulo: 75,
+      relacionado: 30,
+      fator: 2,
+      explicacao: "75° = 30° + 45° (usando soma de ângulos)",
+    },
+    {
+      angulo: 22.5,
+      relacionado: 45,
+      fator: 0.5,
+      explicacao: "22.5° = 45°/2 (usando fórmula do ângulo metade)",
+    },
+    {
+      angulo: 67.5,
+      relacionado: 45,
+      fator: 1.5,
+      explicacao: "67.5° = 45° + 22.5° (usando soma de ângulos)",
+    },
+    {
+      angulo: 18,
+      relacionado: 36,
+      fator: 0.5,
+      explicacao: "18° = 36°/2 (usando fórmula do ângulo metade)",
+    },
+    {
+      angulo: 72,
+      relacionado: 36,
+      fator: 2,
+      explicacao: "72° = 36° × 2 (usando duplicação de ângulo)",
+    },
+  ];
+
+  for (const relacao of angulosRelacionados) {
+    if (Math.abs(anguloNormalizado - relacao.angulo) < 0.1) {
+      if (VALORES_TRIGONOMETRICOS_EXATOS[relacao.relacionado]) {
+        return {
+          valor: null, // Não temos valor exato, mas podemos explicar
+          explicacao: `${relacao.explicacao}. Valor aproximado necessário.`,
+        };
+      }
     }
   }
 
-  return null;
+  // Verificar se é um ângulo que pode ser expresso em termos de ângulos conhecidos
+  const angulosConhecidos = Object.keys(VALORES_TRIGONOMETRICOS_EXATOS).map(
+    Number
+  );
+
+  // Tentar encontrar combinações simples
+  for (const angulo1 of angulosConhecidos) {
+    for (const angulo2 of angulosConhecidos) {
+      // Soma de ângulos
+      if (Math.abs(anguloNormalizado - (angulo1 + angulo2)) < 0.1) {
+        return {
+          valor: null,
+          explicacao: `${angulo}° = ${angulo1}° + ${angulo2}° (soma de ângulos conhecidos). Valor aproximado necessário.`,
+        };
+      }
+      // Diferença de ângulos
+      if (Math.abs(anguloNormalizado - Math.abs(angulo1 - angulo2)) < 0.1) {
+        return {
+          valor: null,
+          explicacao: `${angulo}° = |${angulo1}° - ${angulo2}°| (diferença de ângulos conhecidos). Valor aproximado necessário.`,
+        };
+      }
+    }
+  }
+
+  // Se não encontrou nenhuma relação
+  return {
+    valor: null,
+    explicacao: `Ângulo ${angulo}° não possui valor trigonométrico exato conhecido. Usando aproximação decimal.`,
+  };
 };
 
 // Função para formatar fração com CSS
@@ -548,13 +685,23 @@ export const formatarValorTrigonometrico = (
   angulo: number,
   tipo: "seno" | "cosseno" | "tangente",
   usarFracao: boolean = true
-): string => {
+): { valor: string; explicacao?: string } => {
   if (usarFracao) {
-    const valorExato = getValorTrigonometricoExato(angulo, tipo);
-    if (valorExato) {
-      return formatarFracao(valorExato);
+    const resultadoExato = getValorTrigonometricoExato(angulo, tipo);
+    if (resultadoExato.valor) {
+      return {
+        valor: formatarFracao(resultadoExato.valor),
+        explicacao: resultadoExato.explicacao,
+      };
+    } else {
+      return {
+        valor: formatarNumero(valor),
+        explicacao: resultadoExato.explicacao,
+      };
     }
   }
 
-  return formatarNumero(valor);
+  return {
+    valor: formatarNumero(valor),
+  };
 };
