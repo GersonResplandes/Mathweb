@@ -80,13 +80,25 @@ const TrianguloRetangulo: React.FC = () => {
 
   // Função para extrair valores dos passos HTML
   const extrairValorDoPasso = (passos: string[], texto: string): string => {
-    const passo = passos.find((p) => p.includes(texto));
-    if (!passo) return "N/A";
+    // Procurar no passo que contém "Resultados finais"
+    const passoResultados = passos.find((p) =>
+      p.includes("📊 Resultados finais:")
+    );
+    if (!passoResultados) return "N/A";
 
-    // Remover tags HTML e extrair o valor
-    const textoLimpo = passo.replace(/<br>/g, " ").replace(/<[^>]*>/g, "");
-    const match = textoLimpo.match(new RegExp(`${texto}\\s*=\\s*([^\\s]+)`));
-    return match ? match[1] : "N/A";
+    // Remover tags HTML e quebrar em linhas
+    const textoLimpo = passoResultados
+      .replace(/<br>/g, "\n")
+      .replace(/<[^>]*>/g, "");
+    const linhas = textoLimpo.split("\n");
+
+    // Procurar a linha que contém o texto desejado
+    const linha = linhas.find((l) => l.includes(texto));
+    if (!linha) return "N/A";
+
+    // Extrair o valor após o "="
+    const match = linha.match(/=\s*([^•\n]+)/);
+    return match ? match[1].trim() : "N/A";
   };
 
   return (
@@ -248,19 +260,13 @@ const TrianguloRetangulo: React.FC = () => {
                       <div className="d-flex justify-content-between">
                         <span>Ângulo α:</span>
                         <strong className="text-primary">
-                          {resultado.passos
-                            .find((p) => p.includes("Ângulo α ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {extrairValorDoPasso(resultado.passos, "Ângulo α")}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Ângulo β:</span>
                         <strong className="text-primary">
-                          {resultado.passos
-                            .find((p) => p.includes("Ângulo β ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {extrairValorDoPasso(resultado.passos, "Ângulo β")}
                         </strong>
                       </div>
                     </div>
@@ -268,28 +274,25 @@ const TrianguloRetangulo: React.FC = () => {
                       <div className="d-flex justify-content-between">
                         <span>Adjacente:</span>
                         <strong className="text-success">
-                          {resultado.passos
-                            .find((p) => p.includes("Cateto Adjacente ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {extrairValorDoPasso(
+                            resultado.passos,
+                            "Cateto Adjacente"
+                          )}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Oposto:</span>
                         <strong className="text-success">
-                          {resultado.passos
-                            .find((p) => p.includes("Cateto Oposto ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {extrairValorDoPasso(
+                            resultado.passos,
+                            "Cateto Oposto"
+                          )}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Hipotenusa:</span>
                         <strong className="text-success">
-                          {resultado.passos
-                            .find((p) => p.includes("Hipotenusa ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {extrairValorDoPasso(resultado.passos, "Hipotenusa")}
                         </strong>
                       </div>
                     </div>
