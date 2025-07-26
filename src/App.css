@@ -397,8 +397,8 @@
   margin-left: 8px;
 }
 
-/* Fração com raiz no denominador */
-.fracao-raiz-denominador {
+/* Fração invertida (raiz no denominador) */
+.fracao-invertida {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -408,7 +408,7 @@
   position: relative;
 }
 
-.fracao-raiz-denominador .numerador {
+.fracao-invertida .numerador {
   display: block;
   padding: 2px 4px;
   border-bottom: 1px solid #333;
@@ -416,80 +416,68 @@
   font-size: 1.1em;
 }
 
-.fracao-raiz-denominador .fracao-linha {
+.fracao-invertida .fracao-linha {
   display: block;
   height: 1px;
   background-color: #333;
   margin: 1px 0;
 }
 
-.fracao-raiz-denominador .raiz-simbolo {
-  position: absolute;
-  bottom: -8px;
-  left: 4px;
-  font-size: 1.2em;
-  color: #333;
-}
-
-.fracao-raiz-denominador .raiz-valor {
-  display: inline-block;
+.fracao-invertida .denominador {
+  display: block;
   padding: 2px 4px;
   line-height: 1.2;
   font-size: 1.1em;
-  margin-left: 8px;
-}
-
-/* Fração com raiz em ambos (numerador e denominador) */
-.fracao-raiz-dupla {
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  margin: 0 2px;
-  font-family: "Times New Roman", serif;
-  font-weight: bold;
   position: relative;
 }
 
-.fracao-raiz-dupla .raiz-simbolo-num {
+.fracao-invertida .denominador .raiz-simbolo {
   position: absolute;
   top: -8px;
-  left: -8px;
+  left: -4px;
   font-size: 1.2em;
   color: #333;
 }
 
-.fracao-raiz-dupla .raiz-valor-num {
+.fracao-invertida .denominador .raiz-valor {
   display: inline-block;
-  padding: 2px 4px;
-  border-bottom: 1px solid #333;
-  line-height: 1.2;
-  font-size: 1.1em;
   margin-left: 8px;
 }
 
-.fracao-raiz-dupla .fracao-linha {
-  display: block;
-  height: 1px;
-  background-color: #333;
-  margin: 1px 0;
-  margin-left: 8px;
-  margin-right: 4px;
+/* Classes utilitárias para frações */
+.fracao-grande {
+  font-size: 1.5em;
 }
 
-.fracao-raiz-dupla .raiz-simbolo-den {
-  position: absolute;
-  bottom: -8px;
-  left: 4px;
-  font-size: 1.2em;
-  color: #333;
+.fracao-pequena {
+  font-size: 0.9em;
 }
 
-.fracao-raiz-dupla .raiz-valor-den {
-  display: inline-block;
-  padding: 2px 4px;
-  line-height: 1.2;
-  font-size: 1.1em;
-  margin-left: 8px;
+.fracao-colorida {
+  color: #007bff;
+}
+
+.fracao-colorida .fracao-linha {
+  background-color: #007bff;
+}
+
+.fracao-destaque {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+/* Animações para frações */
+.fracao:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+.fracao-raiz:hover,
+.fracao-invertida:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }
 
 /* Melhorias para exibição de valores trigonométricos */
