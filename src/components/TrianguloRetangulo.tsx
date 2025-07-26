@@ -143,7 +143,10 @@ const TrianguloRetangulo: React.FC = () => {
     const fracoesMatch = passo.match(/(\d+)\s*\/\s*(\d+)/g);
     if (fracoesMatch) {
       let resultado = passo;
-      const componentes = [];
+      const componentes: Array<{
+        placeholder: string;
+        componente: React.ReactElement;
+      }> = [];
 
       fracoesMatch.forEach((fracao, index) => {
         const match = fracao.match(/(\d+)\s*\/\s*(\d+)/);
@@ -318,9 +321,7 @@ const TrianguloRetangulo: React.FC = () => {
                 <div className="mt-3">
                   <h6 className="text-success mb-2">📝 Passos do Cálculo:</h6>
                   <div className="passos-container">
-                    {resultado.passos.map((passo, index) =>
-                      renderizarPasso(passo)
-                    )}
+                    {resultado.passos.map((passo) => renderizarPasso(passo))}
                   </div>
                 </div>
               )}
