@@ -9,6 +9,7 @@ import {
   FormCheck,
 } from "react-bootstrap";
 import { calcularTrianguloRetangulo } from "../utils/mathUtils";
+import { FracaoInteligente } from "./fraction";
 
 const TrianguloRetangulo: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -77,6 +78,68 @@ const TrianguloRetangulo: React.FC = () => {
     });
     setResultado(null);
     setErro("");
+  };
+
+  // Função para renderizar passos com frações
+  const renderizarPasso = (passo: string) => {
+    // Verificar se o passo contém uma fração trigonométrica
+    if (passo.includes("tg(") && passo.includes("/")) {
+      // Extrair valores da fração
+      const match = passo.match(/tg\((\d+)°\)\s*=\s*(\d+)\s*\/\s*(\d+)/);
+      if (match) {
+        const [, angulo, numerador, denominador] = match;
+        return (
+          <div key={passo} className="passo-calculo">
+            <span>tg({angulo}°) = </span>
+            <FracaoInteligente
+              numerador={numerador}
+              denominador={denominador}
+            />
+          </div>
+        );
+      }
+    }
+
+    if (passo.includes("sen(") && passo.includes("/")) {
+      const match = passo.match(/sen\((\d+)°\)\s*=\s*(\d+)\s*\/\s*(\d+)/);
+      if (match) {
+        const [, angulo, numerador, denominador] = match;
+        return (
+          <div key={passo} className="passo-calculo">
+            <span>sen({angulo}°) = </span>
+            <FracaoInteligente
+              numerador={numerador}
+              denominador={denominador}
+            />
+          </div>
+        );
+      }
+    }
+
+    if (passo.includes("cos(") && passo.includes("/")) {
+      const match = passo.match(/cos\((\d+)°\)\s*=\s*(\d+)\s*\/\s*(\d+)/);
+      if (match) {
+        const [, angulo, numerador, denominador] = match;
+        return (
+          <div key={passo} className="passo-calculo">
+            <span>cos({angulo}°) = </span>
+            <FracaoInteligente
+              numerador={numerador}
+              denominador={denominador}
+            />
+          </div>
+        );
+      }
+    }
+
+    // Para outros passos, renderizar normalmente
+    return (
+      <div
+        key={passo}
+        className="passo-calculo"
+        dangerouslySetInnerHTML={{ __html: passo }}
+      ></div>
+    );
   };
 
   return (
@@ -204,13 +267,9 @@ const TrianguloRetangulo: React.FC = () => {
                 <div className="mt-3">
                   <h6 className="text-success mb-2">📝 Passos do Cálculo:</h6>
                   <div className="passos-container">
-                    {resultado.passos.map((passo, index) => (
-                      <div
-                        key={index}
-                        className="passo-calculo"
-                        dangerouslySetInnerHTML={{ __html: passo }}
-                      ></div>
-                    ))}
+                    {resultado.passos.map((passo, index) =>
+                      renderizarPasso(passo)
+                    )}
                   </div>
                 </div>
               )}

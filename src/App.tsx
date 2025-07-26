@@ -16,7 +16,7 @@ import TrianguloRetangulo from "./components/TrianguloRetangulo";
 import LeiCossenos from "./components/LeiCossenos";
 import LeiSenos from "./components/LeiSenos";
 import ConversorTemperatura from "./components/ConversorTemperatura";
-import FuncaoSegundoGrau from "./components/FuncaoSegundoGrau";
+import FuncaoSegundoGrau from "./components/fraction/FuncaoSegundoGrau";
 import ExpressaoMatematica from "./components/ExpressaoMatematica";
 
 // Tipos

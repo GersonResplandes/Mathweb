@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Alert, Row, Col } from "react-bootstrap";
-import { calcularFuncaoSegundoGrau } from "../utils/mathUtils";
+import { calcularFuncaoSegundoGrau } from "../../utils/mathUtils";
 
 const FuncaoSegundoGrau: React.FC = () => {
   const [formData, setFormData] = useState({

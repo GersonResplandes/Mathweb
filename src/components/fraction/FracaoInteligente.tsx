@@ -1,5 +1,5 @@
 import React from "react";
-import Fracao from "./fraction/Fracaoo";
+import Fracao from "./Fracao";
 import FracaoRaiz from "./FracaoRaiz";
 
 interface FracaoInteligenteProps {
