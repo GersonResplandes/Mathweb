@@ -204,13 +204,27 @@ const TrianguloRetangulo: React.FC = () => {
                 <div className="mt-3">
                   <h6 className="text-success mb-2">📝 Passos do Cálculo:</h6>
                   <div className="passos-container">
-                    {resultado.passos.map((passo, index) => (
-                      <div
-                        key={index}
-                        className="passo-calculo"
-                        dangerouslySetInnerHTML={{ __html: passo }}
-                      />
-                    ))}
+                    {resultado.passos.map((passo, index) => {
+                      // Determinar a classe CSS baseada no conteúdo
+                      let className = "passo-calculo";
+                      if (
+                        passo.includes("📐") ||
+                        passo.includes("🔢") ||
+                        passo.includes("📊")
+                      ) {
+                        className += " titulo-secao";
+                      } else if (passo.includes("ℹ️")) {
+                        className += " explicacao";
+                      }
+
+                      return (
+                        <div
+                          key={index}
+                          className={className}
+                          dangerouslySetInnerHTML={{ __html: passo }}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -224,31 +238,19 @@ const TrianguloRetangulo: React.FC = () => {
                       <div className="d-flex justify-content-between">
                         <span>Ângulo α:</span>
                         <strong className="text-primary">
-                          {(() => {
-                            const passo = resultado.passos.find((p) =>
-                              p.includes("Ângulo α =")
-                            );
-                            if (passo) {
-                              const match = passo.match(/Ângulo α = ([^<]+)/);
-                              return match ? match[1].trim() : "N/A";
-                            }
-                            return "N/A";
-                          })()}
+                          {resultado.passos
+                            .find((p) => p.includes("Ângulo α ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Ângulo β:</span>
                         <strong className="text-primary">
-                          {(() => {
-                            const passo = resultado.passos.find((p) =>
-                              p.includes("Ângulo β =")
-                            );
-                            if (passo) {
-                              const match = passo.match(/Ângulo β = ([^<]+)/);
-                              return match ? match[1].trim() : "N/A";
-                            }
-                            return "N/A";
-                          })()}
+                          {resultado.passos
+                            .find((p) => p.includes("Ângulo β ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                     </div>
@@ -256,50 +258,28 @@ const TrianguloRetangulo: React.FC = () => {
                       <div className="d-flex justify-content-between">
                         <span>Adjacente:</span>
                         <strong className="text-success">
-                          {(() => {
-                            const passo = resultado.passos.find((p) =>
-                              p.includes("Cateto Adjacente =")
-                            );
-                            if (passo) {
-                              const match = passo.match(
-                                /Cateto Adjacente = ([^<]+)/
-                              );
-                              return match ? match[1].trim() : "N/A";
-                            }
-                            return "N/A";
-                          })()}
+                          {resultado.passos
+                            .find((p) => p.includes("Cateto Adjacente ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Oposto:</span>
                         <strong className="text-success">
-                          {(() => {
-                            const passo = resultado.passos.find((p) =>
-                              p.includes("Cateto Oposto =")
-                            );
-                            if (passo) {
-                              const match = passo.match(
-                                /Cateto Oposto = ([^<]+)/
-                              );
-                              return match ? match[1].trim() : "N/A";
-                            }
-                            return "N/A";
-                          })()}
+                          {resultado.passos
+                            .find((p) => p.includes("Cateto Oposto ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Hipotenusa:</span>
                         <strong className="text-success">
-                          {(() => {
-                            const passo = resultado.passos.find((p) =>
-                              p.includes("Hipotenusa =")
-                            );
-                            if (passo) {
-                              const match = passo.match(/Hipotenusa = ([^<]+)/);
-                              return match ? match[1].trim() : "N/A";
-                            }
-                            return "N/A";
-                          })()}
+                          {resultado.passos
+                            .find((p) => p.includes("Hipotenusa ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
                         </strong>
                       </div>
                     </div>

@@ -204,6 +204,36 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilo para títulos de seções */
+.passo-calculo:has(span:first-child:contains("📐")),
+.passo-calculo:has(span:first-child:contains("🔢")),
+.passo-calculo:has(span:first-child:contains("📊")),
+.passo-calculo:has(span:first-child:contains("ℹ️")) {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Estilo específico para títulos */
+.passo-calculo.titulo-secao {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #1976d2;
+}
+
+/* Estilo para explicações */
+.passo-calculo.explicacao {
+  background: #fff3e0;
+  border-left: 4px solid #ff9800;
+  font-style: italic;
+  color: #e65100;
+}
+
 .passo-calculo:last-child {
   margin-bottom: 0;
 }
@@ -320,7 +350,7 @@
   }
 }
 
-/* Frações matemáticas */
+/* Estilos para frações trigonométricas */
 .fracao {
   display: inline-block;
   text-align: center;
@@ -328,7 +358,6 @@
   margin: 0 2px;
   font-family: "Times New Roman", serif;
   font-weight: bold;
-  position: relative;
 }
 
 .fracao .numerador {
@@ -337,8 +366,6 @@
   border-bottom: 1px solid #333;
   line-height: 1.2;
   font-size: 1.1em;
-  text-align: center;
-  width: 100%;
 }
 
 .fracao .fracao-linha {
@@ -346,7 +373,6 @@
   height: 1px;
   background-color: #333;
   margin: 1px 0;
-  width: 100%;
 }
 
 .fracao .denominador {
@@ -354,8 +380,6 @@
   padding: 2px 4px;
   line-height: 1.2;
   font-size: 1.1em;
-  text-align: center;
-  width: 100%;
 }
 
 /* Fração com raiz quadrada */
@@ -384,7 +408,6 @@
   line-height: 1.2;
   font-size: 1.1em;
   margin-left: 8px;
-  text-align: center;
 }
 
 .fracao-raiz .fracao-linha {
@@ -394,7 +417,6 @@
   margin: 1px 0;
   margin-left: 8px;
   margin-right: 4px;
-  width: calc(100% - 12px);
 }
 
 .fracao-raiz .denominador {
@@ -403,8 +425,6 @@
   line-height: 1.2;
   font-size: 1.1em;
   margin-left: 8px;
-  text-align: center;
-  width: calc(100% - 8px);
 }
 
 /* Fração com raiz no denominador */
@@ -424,8 +444,6 @@
   border-bottom: 1px solid #333;
   line-height: 1.2;
   font-size: 1.1em;
-  text-align: center;
-  width: 100%;
 }
 
 .fracao-raiz-denominador .fracao-linha {
@@ -433,17 +451,14 @@
   height: 1px;
   background-color: #333;
   margin: 1px 0;
-  width: 100%;
 }
 
 .fracao-raiz-denominador .raiz-simbolo {
   position: absolute;
   bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 4px;
   font-size: 1.2em;
   color: #333;
-  margin-left: -4px;
 }
 
 .fracao-raiz-denominador .raiz-valor {
@@ -451,7 +466,6 @@
   padding: 2px 4px;
   line-height: 1.2;
   font-size: 1.1em;
-  text-align: center;
   margin-left: 8px;
 }
 
@@ -541,57 +555,5 @@
     top: -6px;
     left: -6px;
     font-size: 1em;
-  }
-}
-
-/* Estilos para grupos de cálculo */
-.calculo-grupo {
-  background: white;
-  padding: 12px 16px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  border-left: 4px solid #007bff;
-  font-family: "Courier New", monospace;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  white-space: pre-line;
-}
-
-.calculo-grupo:last-child {
-  margin-bottom: 0;
-}
-
-/* Títulos das seções */
-.passo-calculo:not(.calculo-grupo) {
-  background: #f8f9fa;
-  padding: 8px 12px;
-  margin-bottom: 6px;
-  border-radius: 6px;
-  border-left: 4px solid #28a745;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #155724;
-}
-
-/* Explicações */
-.passo-calculo:contains("ℹ️") {
-  background: #fff3cd;
-  border-left-color: #ffc107;
-  color: #856404;
-  font-style: italic;
-}
-
-/* Responsividade para grupos de cálculo */
-@media (max-width: 768px) {
-  .calculo-grupo {
-    padding: 10px 14px;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-
-  .passo-calculo:not(.calculo-grupo) {
-    padding: 6px 10px;
-    font-size: 0.9rem;
   }
 }

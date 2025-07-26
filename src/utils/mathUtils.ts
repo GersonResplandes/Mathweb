@@ -124,9 +124,9 @@ export const calcularTrianguloRetangulo = (dados: {
 
     passos.push(`🔢 Cálculo do cateto oposto:`);
     passos.push(
-      `<div class="calculo-grupo">tg(${angulo}°) = oposto / ${adjacente}<br>oposto = ${adjacente} × tg(${angulo}°)<br>oposto = ${adjacente} × ${
+      `tg(${angulo}°) = oposto / ${adjacente}<br>oposto = ${adjacente} × tg(${angulo}°)<br>oposto = ${adjacente} × ${
         tangenteFormatada.valor
-      }<br>oposto = ${formatarNumero(opostoCalculado)}</div>`
+      }<br>oposto = ${formatarNumero(opostoCalculado)}`
     );
 
     // Adicionar explicação se o ângulo não tem valor exato
@@ -139,16 +139,16 @@ export const calcularTrianguloRetangulo = (dados: {
 
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(
-      `<div class="calculo-grupo">cos(${angulo}°) = ${adjacente} / hipotenusa<br>hipotenusa = ${adjacente} / cos(${angulo}°)<br>hipotenusa = ${adjacente} / ${
+      `cos(${angulo}°) = ${adjacente} / hipotenusa<br>hipotenusa = ${adjacente} / cos(${angulo}°)<br>hipotenusa = ${adjacente} / ${
         cossenoFormatado.valor
-      }<br>hipotenusa = ${formatarNumero(hipotenusaCalculada)}</div>`
+      }<br>hipotenusa = ${formatarNumero(hipotenusaCalculada)}`
     );
 
     passos.push(`📊 Resultados finais:`);
     passos.push(
-      `<div class="calculo-grupo">• Ângulo α = ${angulo}°<br>• Ângulo β = ${anguloComplementar}°<br>• Cateto Adjacente = ${adjacente}<br>• Cateto Oposto = ${formatarNumero(
+      `• Ângulo α = ${angulo}°<br>• Ângulo β = ${anguloComplementar}°<br>• Cateto Adjacente = ${adjacente}<br>• Cateto Oposto = ${formatarNumero(
         opostoCalculado
-      )}<br>• Hipotenusa = ${formatarNumero(hipotenusaCalculada)}</div>`
+      )}<br>• Hipotenusa = ${formatarNumero(hipotenusaCalculada)}`
     );
   }
 
@@ -185,9 +185,9 @@ export const calcularTrianguloRetangulo = (dados: {
 
     passos.push(`🔢 Cálculo do cateto adjacente:`);
     passos.push(
-      `<div class="calculo-grupo">tg(${angulo}°) = ${oposto} / adjacente<br>adjacente = ${oposto} / tg(${angulo}°)<br>adjacente = ${oposto} / ${
+      `tg(${angulo}°) = ${oposto} / adjacente<br>adjacente = ${oposto} / tg(${angulo}°)<br>adjacente = ${oposto} / ${
         tangenteFormatada.valor
-      }<br>adjacente = ${formatarNumero(adjacenteCalculado)}</div>`
+      }<br>adjacente = ${formatarNumero(adjacenteCalculado)}`
     );
 
     // Adicionar explicação se o ângulo não tem valor exato
@@ -197,18 +197,18 @@ export const calcularTrianguloRetangulo = (dados: {
 
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(
-      `<div class="calculo-grupo">sen(${angulo}°) = ${oposto} / hipotenusa<br>hipotenusa = ${oposto} / sen(${angulo}°)<br>hipotenusa = ${oposto} / ${
+      `sen(${angulo}°) = ${oposto} / hipotenusa<br>hipotenusa = ${oposto} / sen(${angulo}°)<br>hipotenusa = ${oposto} / ${
         senoFormatado.valor
-      }<br>hipotenusa = ${formatarNumero(hipotenusaCalculada)}</div>`
+      }<br>hipotenusa = ${formatarNumero(hipotenusaCalculada)}`
     );
 
     passos.push(`📊 Resultados finais:`);
     passos.push(
-      `<div class="calculo-grupo">• Ângulo α = ${angulo}°<br>• Ângulo β = ${anguloComplementar}°<br>• Cateto Adjacente = ${formatarNumero(
+      `• Ângulo α = ${angulo}°<br>• Ângulo β = ${anguloComplementar}°<br>• Cateto Adjacente = ${formatarNumero(
         adjacenteCalculado
       )}<br>• Cateto Oposto = ${oposto}<br>• Hipotenusa = ${formatarNumero(
         hipotenusaCalculada
-      )}</div>`
+      )}`
     );
   }
 
@@ -225,31 +225,31 @@ export const calcularTrianguloRetangulo = (dados: {
 
     passos.push(`🔢 Cálculo da hipotenusa (Teorema de Pitágoras):`);
     passos.push(
-      `<div class="calculo-grupo">hipotenusa² = ${adjacente}² + ${oposto}²<br>hipotenusa² = ${
+      `hipotenusa² = ${adjacente}² + ${oposto}²<br>hipotenusa² = ${
         adjacente! ** 2
       } + ${oposto! ** 2}<br>hipotenusa² = ${
         adjacente! ** 2 + oposto! ** 2
       }<br>hipotenusa = √${
         adjacente! ** 2 + oposto! ** 2
-      }<br>hipotenusa = ${formatarNumero(hipotenusaCalculada)}</div>`
+      }<br>hipotenusa = ${formatarNumero(hipotenusaCalculada)}`
     );
 
     passos.push(`🔢 Cálculo do ângulo α:`);
     passos.push(
-      `<div class="calculo-grupo">tg(α) = ${oposto} / ${adjacente}<br>α = tg⁻¹(${oposto} / ${adjacente})<br>α = tg⁻¹(${formatarNumero(
+      `tg(α) = ${oposto} / ${adjacente}<br>α = tg⁻¹(${oposto} / ${adjacente})<br>α = tg⁻¹(${formatarNumero(
         oposto! / adjacente!
-      )})<br>α = ${formatarNumero(anguloCalculado)}°</div>`
+      )})<br>α = ${formatarNumero(anguloCalculado)}°`
     );
 
     passos.push(`📊 Resultados finais:`);
     passos.push(
-      `<div class="calculo-grupo">• Ângulo α = ${formatarNumero(
+      `• Ângulo α = ${formatarNumero(
         anguloCalculado
       )}°<br>• Ângulo β = ${formatarNumero(
         anguloComplementar
       )}°<br>• Cateto Adjacente = ${adjacente}<br>• Cateto Oposto = ${oposto}<br>• Hipotenusa = ${formatarNumero(
         hipotenusaCalculada
-      )}</div>`
+      )}`
     );
   }
 
@@ -274,33 +274,41 @@ export const calcularTrianguloRetangulo = (dados: {
 
     passos.push(`🔢 Cálculo do cateto oposto (Teorema de Pitágoras):`);
     passos.push(
-      `<div class="calculo-grupo">oposto² = ${hipotenusa}² - ${adjacente}²<br>oposto² = ${
+      `oposto² = ${hipotenusa}² - ${adjacente}²<br>oposto² = ${
         hipotenusa! ** 2
       } - ${adjacente! ** 2}<br>oposto² = ${
         hipotenusa! ** 2 - adjacente! ** 2
       }<br>oposto = √${
         hipotenusa! ** 2 - adjacente! ** 2
-      }<br>oposto = ${formatarNumero(opostoCalculado)}</div>`
+      }<br>oposto = ${formatarNumero(opostoCalculado)}`
     );
+
+    // Adicionar explicação se o ângulo não tem valor exato
+    if (
+      cossenoFormatado.explicacao &&
+      !cossenoFormatado.valor.includes("fracao")
+    ) {
+      passos.push(`ℹ️ ${cossenoFormatado.explicacao}`);
+    }
 
     passos.push(`🔢 Cálculo do ângulo α:`);
     passos.push(
-      `<div class="calculo-grupo">cos(α) = ${adjacente} / ${hipotenusa} = ${
+      `cos(α) = ${adjacente} / ${hipotenusa} = ${
         cossenoFormatado.valor
       }<br>α = cos⁻¹(${adjacente} / ${hipotenusa})<br>α = cos⁻¹(${formatarNumero(
         adjacente! / hipotenusa!
-      )})<br>α = ${formatarNumero(anguloCalculado)}°</div>`
+      )})<br>α = ${formatarNumero(anguloCalculado)}°`
     );
 
     passos.push(`📊 Resultados finais:`);
     passos.push(
-      `<div class="calculo-grupo">• Ângulo α = ${formatarNumero(
+      `• Ângulo α = ${formatarNumero(
         anguloCalculado
       )}°<br>• Ângulo β = ${formatarNumero(
         anguloComplementar
       )}°<br>• Cateto Adjacente = ${adjacente}<br>• Cateto Oposto = ${formatarNumero(
         opostoCalculado
-      )}<br>• Hipotenusa = ${hipotenusa}</div>`
+      )}<br>• Hipotenusa = ${hipotenusa}`
     );
   }
 
@@ -324,33 +332,38 @@ export const calcularTrianguloRetangulo = (dados: {
 
     passos.push(`🔢 Cálculo do cateto adjacente (Teorema de Pitágoras):`);
     passos.push(
-      `<div class="calculo-grupo">adjacente² = ${hipotenusa}² - ${oposto}²<br>adjacente² = ${
+      `adjacente² = ${hipotenusa}² - ${oposto}²<br>adjacente² = ${
         hipotenusa! ** 2
       } - ${oposto! ** 2}<br>adjacente² = ${
         hipotenusa! ** 2 - oposto! ** 2
       }<br>adjacente = √${
         hipotenusa! ** 2 - oposto! ** 2
-      }<br>adjacente = ${formatarNumero(adjacenteCalculado)}</div>`
+      }<br>adjacente = ${formatarNumero(adjacenteCalculado)}`
     );
+
+    // Adicionar explicação se o ângulo não tem valor exato
+    if (senoFormatado.explicacao && !senoFormatado.valor.includes("fracao")) {
+      passos.push(`ℹ️ ${senoFormatado.explicacao}`);
+    }
 
     passos.push(`🔢 Cálculo do ângulo α:`);
     passos.push(
-      `<div class="calculo-grupo">sen(α) = ${oposto} / ${hipotenusa} = ${
+      `sen(α) = ${oposto} / ${hipotenusa} = ${
         senoFormatado.valor
       }<br>α = sen⁻¹(${oposto} / ${hipotenusa})<br>α = sen⁻¹(${formatarNumero(
         oposto! / hipotenusa!
-      )})<br>α = ${formatarNumero(anguloCalculado)}°</div>`
+      )})<br>α = ${formatarNumero(anguloCalculado)}°`
     );
 
     passos.push(`📊 Resultados finais:`);
     passos.push(
-      `<div class="calculo-grupo">• Ângulo α = ${formatarNumero(
+      `• Ângulo α = ${formatarNumero(
         anguloCalculado
       )}°<br>• Ângulo β = ${formatarNumero(
         anguloComplementar
       )}°<br>• Cateto Adjacente = ${formatarNumero(
         adjacenteCalculado
-      )}<br>• Cateto Oposto = ${oposto}<br>• Hipotenusa = ${hipotenusa}</div>`
+      )}<br>• Cateto Oposto = ${oposto}<br>• Hipotenusa = ${hipotenusa}`
     );
   }
 
@@ -379,27 +392,40 @@ export const calcularTrianguloRetangulo = (dados: {
       `📐 Dados fornecidos: Ângulo = ${angulo}°, Hipotenusa = ${hipotenusa}`
     );
 
+    // Adicionar explicação se o ângulo não tem valor exato
+    if (senoFormatado.explicacao && !senoFormatado.valor.includes("fracao")) {
+      passos.push(`ℹ️ ${senoFormatado.explicacao}`);
+    }
+
     passos.push(`🔢 Cálculo do cateto oposto:`);
     passos.push(
-      `<div class="calculo-grupo">sen(${angulo}°) = oposto / ${hipotenusa}<br>oposto = ${hipotenusa} × sen(${angulo}°)<br>oposto = ${hipotenusa} × ${
+      `sen(${angulo}°) = oposto / ${hipotenusa}<br>oposto = ${hipotenusa} × sen(${angulo}°)<br>oposto = ${hipotenusa} × ${
         senoFormatado.valor
-      }<br>oposto = ${formatarNumero(opostoCalculado)}</div>`
+      }<br>oposto = ${formatarNumero(opostoCalculado)}`
     );
+
+    // Adicionar explicação se o ângulo não tem valor exato
+    if (
+      cossenoFormatado.explicacao &&
+      !cossenoFormatado.valor.includes("fracao")
+    ) {
+      passos.push(`ℹ️ ${cossenoFormatado.explicacao}`);
+    }
 
     passos.push(`🔢 Cálculo do cateto adjacente:`);
     passos.push(
-      `<div class="calculo-grupo">cos(${angulo}°) = adjacente / ${hipotenusa}<br>adjacente = ${hipotenusa} × cos(${angulo}°)<br>adjacente = ${hipotenusa} × ${
+      `cos(${angulo}°) = adjacente / ${hipotenusa}<br>adjacente = ${hipotenusa} × cos(${angulo}°)<br>adjacente = ${hipotenusa} × ${
         cossenoFormatado.valor
-      }<br>adjacente = ${formatarNumero(adjacenteCalculado)}</div>`
+      }<br>adjacente = ${formatarNumero(adjacenteCalculado)}`
     );
 
     passos.push(`📊 Resultados finais:`);
     passos.push(
-      `<div class="calculo-grupo">• Ângulo α = ${angulo}°<br>• Ângulo β = ${anguloComplementar}°<br>• Cateto Adjacente = ${formatarNumero(
+      `• Ângulo α = ${angulo}°<br>• Ângulo β = ${anguloComplementar}°<br>• Cateto Adjacente = ${formatarNumero(
         adjacenteCalculado
       )}<br>• Cateto Oposto = ${formatarNumero(
         opostoCalculado
-      )}<br>• Hipotenusa = ${hipotenusa}</div>`
+      )}<br>• Hipotenusa = ${hipotenusa}`
     );
   } else {
     resultado = "❌ Erro: Combinação de valores não suportada.";
@@ -730,17 +756,6 @@ export const formatarFracao = (fracao: string): string => {
               <span class="raiz-valor">${raiz}</span>
               <span class="fracao-linha"></span>
               <span class="denominador">${denominador}</span>
-            </span>`;
-  }
-
-  // Se tem raiz quadrada no denominador
-  if (denominador.includes("√")) {
-    const raiz = denominador.replace("√", "");
-    return `<span class="fracao-raiz-denominador">
-              <span class="numerador">${numerador}</span>
-              <span class="fracao-linha"></span>
-              <span class="raiz-simbolo">√</span>
-              <span class="raiz-valor">${raiz}</span>
             </span>`;
   }
 
