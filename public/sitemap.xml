@@ -1,27 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Página principal -->
   <url>
-    <loc>https://mathweb.app/</loc>
-    <lastmod>2024-07-26</lastmod>
+    <loc>https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/</loc>
+    <lastmod>2025-07-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  
+  <!-- Calculadora de Triângulo Retângulo -->
   <url>
-    <loc>https://mathweb.app/#triangulo</loc>
-    <lastmod>2024-07-26</lastmod>
+    <loc>https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/#triangulo-retangulo</loc>
+    <lastmod>2025-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Conversor de Temperatura -->
   <url>
-    <loc>https://mathweb.app/#temperatura</loc>
-    <lastmod>2024-07-26</lastmod>
+    <loc>https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/#conversor-temperatura</loc>
+    <lastmod>2025-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Lei dos Cossenos -->
   <url>
-    <loc>https://mathweb.app/#funcao</loc>
-    <lastmod>2024-07-26</lastmod>
+    <loc>https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/#lei-cossenos</loc>
+    <lastmod>2025-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- Lei dos Senos -->
+  <url>
+    <loc>https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/#lei-senos</loc>
+    <lastmod>2025-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Função do Segundo Grau -->
+  <url>
+    <loc>https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/#funcao-segundo-grau</loc>
+    <lastmod>2025-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Expressão Matemática -->
+  <url>
+    <loc>https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/#expressao-matematica</loc>
+    <lastmod>2025-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
 </urlset> 

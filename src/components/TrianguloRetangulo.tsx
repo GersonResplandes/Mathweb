@@ -172,11 +172,71 @@ const TrianguloRetangulo: React.FC = () => {
               {resultado.passos.length > 0 && (
                 <div className="mt-3">
                   <h6 className="text-success mb-2">📝 Passos do Cálculo:</h6>
-                  {resultado.passos.map((passo, index) => (
-                    <div key={index} className="passo-calculo">
-                      {passo}
+                  <div className="passos-container">
+                    {resultado.passos.map((passo, index) => (
+                      <div key={index} className="passo-calculo">
+                        {passo}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Resumo visual dos resultados */}
+              {resultado.resultado.includes("✅") && (
+                <div className="mt-4 p-3 bg-light rounded">
+                  <h6 className="text-info mb-2">📐 Resumo do Triângulo:</h6>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="d-flex justify-content-between">
+                        <span>Ângulo α:</span>
+                        <strong className="text-primary">
+                          {resultado.passos
+                            .find((p) => p.includes("Ângulo α ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
+                        </strong>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <span>Ângulo β:</span>
+                        <strong className="text-primary">
+                          {resultado.passos
+                            .find((p) => p.includes("Ângulo β ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
+                        </strong>
+                      </div>
                     </div>
-                  ))}
+                    <div className="col-md-6">
+                      <div className="d-flex justify-content-between">
+                        <span>Adjacente:</span>
+                        <strong className="text-success">
+                          {resultado.passos
+                            .find((p) => p.includes("Cateto Adjacente ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
+                        </strong>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <span>Oposto:</span>
+                        <strong className="text-success">
+                          {resultado.passos
+                            .find((p) => p.includes("Cateto Oposto ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
+                        </strong>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <span>Hipotenusa:</span>
+                        <strong className="text-success">
+                          {resultado.passos
+                            .find((p) => p.includes("Hipotenusa ="))
+                            ?.split("=")[1]
+                            ?.trim() || "N/A"}
+                        </strong>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
