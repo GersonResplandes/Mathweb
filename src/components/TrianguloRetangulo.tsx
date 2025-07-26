@@ -209,7 +209,7 @@ const TrianguloRetangulo: React.FC = () => {
                         key={index}
                         className="passo-calculo"
                         dangerouslySetInnerHTML={{ __html: passo }}
-                      ></div>
+                      />
                     ))}
                   </div>
                 </div>
