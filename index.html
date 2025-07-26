@@ -2,19 +2,83 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#007bff" />
+
+    <!-- SEO Meta Tags -->
+    <title>
+      MathWeb - Calculadora Matemática Completa | Trigonometria, Funções e
+      Conversores
+    </title>
     <meta
       name="description"
-      content="Calculadora completa de matemática com trigonometria, funções e conversores"
+      content="Calculadora matemática completa e gratuita. Resolva problemas de trigonometria, funções do segundo grau, conversão de temperatura e expressões matemáticas. Interface moderna e responsiva."
     />
+    <meta
+      name="keywords"
+      content="calculadora, matemática, trigonometria, funções, conversor temperatura, lei dos cossenos, lei dos senos, triângulo retângulo, PWA, app matemático"
+    />
+    <meta name="author" content="MathWeb" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="pt-BR" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mathweb.app" />
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#007bff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="MathWeb" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="MathWeb" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mathweb.app" />
+    <meta
+      property="og:title"
+      content="MathWeb - Calculadora Matemática Completa"
+    />
+    <meta
+      property="og:description"
+      content="Calculadora matemática completa e gratuita. Resolva problemas de trigonometria, funções do segundo grau, conversão de temperatura e expressões matemáticas."
+    />
+    <meta property="og:image" content="https://mathweb.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="MathWeb" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://mathweb.app" />
+    <meta
+      property="twitter:title"
+      content="MathWeb - Calculadora Matemática Completa"
+    />
+    <meta
+      property="twitter:description"
+      content="Calculadora matemática completa e gratuita. Resolva problemas de trigonometria, funções do segundo grau, conversão de temperatura e expressões matemáticas."
+    />
+    <meta
+      property="twitter:image"
+      content="https://mathweb.app/twitter-image.png"
+    />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#007bff" />
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" href="/icon-192x192.png" />
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
     <!-- Bootstrap CSS -->
     <link
@@ -22,7 +86,35 @@
       rel="stylesheet"
     />
 
-    <title>MathWeb - Calculadora Matemática</title>
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MathWeb",
+        "description": "Calculadora matemática completa com trigonometria, funções e conversores",
+        "url": "https://mathweb.app",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "MathWeb"
+        },
+        "featureList": [
+          "Triângulo Retângulo",
+          "Lei dos Cossenos",
+          "Lei dos Senos",
+          "Conversor de Temperatura",
+          "Função do Segundo Grau",
+          "Expressões Matemáticas"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
