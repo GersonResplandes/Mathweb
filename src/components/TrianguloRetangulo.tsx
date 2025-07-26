@@ -139,6 +139,50 @@ const TrianguloRetangulo: React.FC = () => {
       }
     }
 
+    // Detectar frações simples com "/" (ex: 3/4, 1/2, etc.)
+    const fracoesMatch = passo.match(/(\d+)\s*\/\s*(\d+)/g);
+    if (fracoesMatch) {
+      let resultado = passo;
+      const componentes = [];
+
+      fracoesMatch.forEach((fracao, index) => {
+        const match = fracao.match(/(\d+)\s*\/\s*(\d+)/);
+        if (match) {
+          const [, numerador, denominador] = match;
+          const placeholder = `__FRACAO_${index}__`;
+          resultado = resultado.replace(fracao, placeholder);
+          componentes.push({
+            placeholder,
+            componente: (
+              <FracaoInteligente
+                key={`fracao-${index}`}
+                numerador={numerador}
+                denominador={denominador}
+              />
+            ),
+          });
+        }
+      });
+
+      // Se encontrou frações, renderizar com componentes
+      if (componentes.length > 0) {
+        const partes = resultado.split(/(__FRACAO_\d+__)/);
+        return (
+          <div key={passo} className="passo-calculo">
+            {partes.map((parte, index) => {
+              const componente = componentes.find(
+                (c) => c.placeholder === parte
+              );
+              if (componente) {
+                return componente.componente;
+              }
+              return <span key={index}>{parte}</span>;
+            })}
+          </div>
+        );
+      }
+    }
+
     // Para outros passos, renderizar normalmente
     return (
       <div
