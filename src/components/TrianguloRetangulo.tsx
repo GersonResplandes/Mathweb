@@ -84,21 +84,38 @@ const TrianguloRetangulo: React.FC = () => {
     const passoResultados = passos.find((p) =>
       p.includes("📊 Resultados finais:")
     );
-    if (!passoResultados) return "N/A";
+    if (!passoResultados) {
+      console.log("Passo de resultados não encontrado");
+      return "N/A";
+    }
+
+    console.log("Passo encontrado:", passoResultados);
+    console.log("Procurando por:", texto);
 
     // Remover tags HTML e quebrar em linhas
     const textoLimpo = passoResultados
       .replace(/<br>/g, "\n")
       .replace(/<[^>]*>/g, "");
+    console.log("Texto limpo:", textoLimpo);
+
     const linhas = textoLimpo.split("\n");
+    console.log("Linhas:", linhas);
 
     // Procurar a linha que contém o texto desejado
     const linha = linhas.find((l) => l.includes(texto));
-    if (!linha) return "N/A";
+    if (!linha) {
+      console.log("Linha não encontrada para:", texto);
+      return "N/A";
+    }
+
+    console.log("Linha encontrada:", linha);
 
     // Extrair o valor após o "="
     const match = linha.match(/=\s*([^•\n]+)/);
-    return match ? match[1].trim() : "N/A";
+    const resultado = match ? match[1].trim() : "N/A";
+    console.log("Resultado extraído:", resultado);
+
+    return resultado;
   };
 
   return (
