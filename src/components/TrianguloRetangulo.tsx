@@ -9,7 +9,6 @@ import {
   FormCheck,
 } from "react-bootstrap";
 import { calcularTrianguloRetangulo } from "../utils/mathUtils";
-import Fracao from "./Fracao";
 
 const TrianguloRetangulo: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -205,137 +204,13 @@ const TrianguloRetangulo: React.FC = () => {
                 <div className="mt-3">
                   <h6 className="text-success mb-2">📝 Passos do Cálculo:</h6>
                   <div className="passos-container">
-                    {(() => {
-                      const secoes = [];
-                      let secaoAtual = [];
-                      let tituloSecao = "";
-
-                      for (let i = 0; i < resultado.passos.length; i++) {
-                        const passo = resultado.passos[i];
-
-                        // Verificar se é um título de seção (começa com emoji)
-                        if (passo.match(/^[📐🔢📊ℹ️]/)) {
-                          // Se já temos uma seção em andamento, salvá-la
-                          if (secaoAtual.length > 0) {
-                            secoes.push({
-                              titulo: tituloSecao,
-                              passos: secaoAtual,
-                            });
-                          }
-
-                          // Iniciar nova seção
-                          tituloSecao = passo;
-                          secaoAtual = [];
-                        } else {
-                          // Adicionar passo à seção atual
-                          secaoAtual.push(passo);
-                        }
-                      }
-
-                      // Adicionar a última seção
-                      if (secaoAtual.length > 0) {
-                        secoes.push({
-                          titulo: tituloSecao,
-                          passos: secaoAtual,
-                        });
-                      }
-
-                      return secoes.map((secao, index) => (
-                        <div key={index} className="secao-calculo mb-3">
-                          <h6 className="titulo-secao mb-2">{secao.titulo}</h6>
-                          <div className="passos-secao">
-                            {secao.passos.map((passo, passoIndex) => {
-                              // Verificar se o passo contém uma fração que precisa ser renderizada
-                              const renderizarPassoComFracao = (
-                                texto: string
-                              ) => {
-                                // Padrão para encontrar frações no formato "valor / valor"
-                                const padraoFracao =
-                                  /(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)/g;
-                                const padraoFracaoComRaiz =
-                                  /(\d+(?:\.\d+)?)\s*\/\s*√(\d+)/g;
-                                const padraoFracaoRaiz =
-                                  /√(\d+)\s*\/\s*(\d+(?:\.\d+)?)/g;
-
-                                let resultado = texto;
-                                let elementos = [];
-                                let ultimoIndex = 0;
-
-                                // Processar frações simples (ex: 3 / 2)
-                                resultado = resultado.replace(
-                                  padraoFracao,
-                                  (match, num, den, offset) => {
-                                    elementos.push(
-                                      texto.slice(ultimoIndex, offset)
-                                    );
-                                    elementos.push(
-                                      <Fracao
-                                        key={`frac-${offset}`}
-                                        numerador={num}
-                                        denominador={den}
-                                      />
-                                    );
-                                    ultimoIndex = offset + match.length;
-                                    return "";
-                                  }
-                                );
-
-                                // Processar frações com raiz no denominador (ex: 3 / √3)
-                                resultado = resultado.replace(
-                                  padraoFracaoComRaiz,
-                                  (match, num, raiz, offset) => {
-                                    elementos.push(
-                                      texto.slice(ultimoIndex, offset)
-                                    );
-                                    elementos.push(
-                                      <Fracao
-                                        key={`frac-raiz-${offset}`}
-                                        numerador={num}
-                                        denominador={`√${raiz}`}
-                                      />
-                                    );
-                                    ultimoIndex = offset + match.length;
-                                    return "";
-                                  }
-                                );
-
-                                // Processar frações com raiz no numerador (ex: √3 / 2)
-                                resultado = resultado.replace(
-                                  padraoFracaoRaiz,
-                                  (match, raiz, den, offset) => {
-                                    elementos.push(
-                                      texto.slice(ultimoIndex, offset)
-                                    );
-                                    elementos.push(
-                                      <Fracao
-                                        key={`frac-raiz-num-${offset}`}
-                                        numerador={`√${raiz}`}
-                                        denominador={den}
-                                      />
-                                    );
-                                    ultimoIndex = offset + match.length;
-                                    return "";
-                                  }
-                                );
-
-                                // Adicionar o resto do texto
-                                if (ultimoIndex < texto.length) {
-                                  elementos.push(texto.slice(ultimoIndex));
-                                }
-
-                                return elementos.length > 0 ? elementos : texto;
-                              };
-
-                              return (
-                                <div key={passoIndex} className="passo-calculo">
-                                  {renderizarPassoComFracao(passo)}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ));
-                    })()}
+                    {resultado.passos.map((passo, index) => (
+                      <div
+                        key={index}
+                        className="passo-calculo"
+                        dangerouslySetInnerHTML={{ __html: passo }}
+                      ></div>
+                    ))}
                   </div>
                 </div>
               )}

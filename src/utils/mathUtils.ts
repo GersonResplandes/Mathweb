@@ -110,8 +110,6 @@ export const calcularTrianguloRetangulo = (dados: {
     );
 
     resultado = `✅ Triângulo calculado com sucesso!`;
-
-    // Título da seção
     passos.push(
       `📐 Dados fornecidos: Ângulo = ${angulo}°, Adjacente = ${adjacente}`
     );
@@ -124,7 +122,6 @@ export const calcularTrianguloRetangulo = (dados: {
       passos.push(`ℹ️ ${tangenteFormatada.explicacao}`);
     }
 
-    // Título da seção de cálculo do oposto
     passos.push(`🔢 Cálculo do cateto oposto:`);
     passos.push(`   tg(${angulo}°) = oposto / ${adjacente}`);
     passos.push(`   oposto = ${adjacente} × tg(${angulo}°)`);
@@ -139,14 +136,11 @@ export const calcularTrianguloRetangulo = (dados: {
       passos.push(`ℹ️ ${cossenoFormatado.explicacao}`);
     }
 
-    // Título da seção de cálculo da hipotenusa
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(`   cos(${angulo}°) = ${adjacente} / hipotenusa`);
     passos.push(`   hipotenusa = ${adjacente} / cos(${angulo}°)`);
     passos.push(`   hipotenusa = ${adjacente} / ${cossenoFormatado.valor}`);
     passos.push(`   hipotenusa = ${formatarNumero(hipotenusaCalculada)}`);
-
-    // Título da seção de resultados finais
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
     passos.push(`   • Ângulo β = ${anguloComplementar}°`);
@@ -176,38 +170,17 @@ export const calcularTrianguloRetangulo = (dados: {
     );
 
     resultado = `✅ Triângulo calculado com sucesso!`;
-
-    // Título da seção
     passos.push(`📐 Dados fornecidos: Ângulo = ${angulo}°, Oposto = ${oposto}`);
-
-    // Adicionar explicação se o ângulo não tem valor exato
-    if (
-      tangenteFormatada.explicacao &&
-      !tangenteFormatada.valor.includes("fracao")
-    ) {
-      passos.push(`ℹ️ ${tangenteFormatada.explicacao}`);
-    }
-
-    // Título da seção de cálculo do adjacente
     passos.push(`🔢 Cálculo do cateto adjacente:`);
     passos.push(`   tg(${angulo}°) = ${oposto} / adjacente`);
     passos.push(`   adjacente = ${oposto} / tg(${angulo}°)`);
-    passos.push(`   adjacente = ${oposto} / ${tangenteFormatada.valor}`);
+    passos.push(`   adjacente = ${oposto} / ${tangenteFormatada}`);
     passos.push(`   adjacente = ${formatarNumero(adjacenteCalculado)}`);
-
-    // Adicionar explicação se o ângulo não tem valor exato
-    if (senoFormatado.explicacao && !senoFormatado.valor.includes("fracao")) {
-      passos.push(`ℹ️ ${senoFormatado.explicacao}`);
-    }
-
-    // Título da seção de cálculo da hipotenusa
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(`   sen(${angulo}°) = ${oposto} / hipotenusa`);
     passos.push(`   hipotenusa = ${oposto} / sen(${angulo}°)`);
-    passos.push(`   hipotenusa = ${oposto} / ${senoFormatado.valor}`);
+    passos.push(`   hipotenusa = ${oposto} / ${senoFormatado}`);
     passos.push(`   hipotenusa = ${formatarNumero(hipotenusaCalculada)}`);
-
-    // Título da seção de resultados finais
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
     passos.push(`   • Ângulo β = ${anguloComplementar}°`);
@@ -712,29 +685,23 @@ export const formatarValorTrigonometrico = (
   angulo: number,
   tipo: "seno" | "cosseno" | "tangente",
   usarFracao: boolean = true
-): {
-  valor: string;
-  explicacao?: string;
-  fracao?: { numerador: string; denominador: string };
-} => {
+): { valor: string; explicacao?: string } => {
   if (usarFracao) {
-    const valorExato = getValorTrigonometricoExato(angulo, tipo);
-    if (valorExato.valor) {
-      // Se tem valor exato, retornar dados estruturados para o componente
-      const [numerador, denominador] = valorExato.valor.split("/");
+    const resultadoExato = getValorTrigonometricoExato(angulo, tipo);
+    if (resultadoExato.valor) {
       return {
-        valor: valorExato.valor,
-        explicacao: valorExato.explicacao,
-        fracao: {
-          numerador: numerador || valorExato.valor,
-          denominador: denominador || "1",
-        },
+        valor: formatarFracao(resultadoExato.valor),
+        explicacao: resultadoExato.explicacao,
+      };
+    } else {
+      return {
+        valor: formatarNumero(valor),
+        explicacao: resultadoExato.explicacao,
       };
     }
   }
 
   return {
     valor: formatarNumero(valor),
-    explicacao: getValorTrigonometricoExato(angulo, tipo).explicacao,
   };
 };

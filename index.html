@@ -2,97 +2,68 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/icon-192x192.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- SEO Meta Tags -->
-    <title>
-      MathWeb - Calculadora Matemática Completa | Trigonometria, Funções e
-      Conversores
-    </title>
-    <meta
-      name="description"
-      content="Calculadora matemática completa e gratuita. Resolva problemas de trigonometria, funções do segundo grau, conversão de temperatura e expressões matemáticas. Interface moderna e responsiva."
-    />
-    <meta
-      name="keywords"
-      content="calculadora, matemática, trigonometria, funções, conversor temperatura, lei dos cossenos, lei dos senos, triângulo retângulo, PWA, app matemático"
-    />
-    <meta name="author" content="MathWeb" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="pt-BR" />
-    <meta name="revisit-after" content="7 days" />
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://mathweb.app" />
+    <title>MathWeb - Calculadoras Matemáticas</title>
 
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#007bff" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="MathWeb" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="MathWeb" />
+    <link rel="apple-touch-icon" href="/icon-192x192.svg" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- SEO Meta Tags -->
     <meta
-      property="og:url"
-      content="https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app"
+      name="description"
+      content="Calculadora online gratuita com múltiplas ferramentas matemáticas: triângulo retângulo, conversor de temperatura, lei dos cossenos, lei dos senos, função do segundo grau e expressões matemáticas."
     />
+    <meta
+      name="keywords"
+      content="calculadora, matemática, trigonometria, triângulo retângulo, conversor temperatura, lei cossenos, lei senos, função segundo grau, expressões matemáticas"
+    />
+    <meta name="author" content="Gérson Resplandes" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="MathWeb - Calculadoras Matemáticas" />
     <meta
       property="og:description"
       content="Calculadora online gratuita com múltiplas ferramentas matemáticas: triângulo retângulo, conversor de temperatura, lei dos cossenos, lei dos senos, função do segundo grau e expressões matemáticas."
     />
+    <meta property="og:type" content="website" />
     <meta
-      property="og:image"
-      content="https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/icon-512x512.png"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:site_name" content="MathWeb" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta
-      property="twitter:url"
+      property="og:url"
       content="https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app"
     />
     <meta
-      property="twitter:title"
-      content="MathWeb - Calculadoras Matemáticas"
+      property="og:image"
+      content="https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/icon-512x512.svg"
     />
+    <meta property="og:site_name" content="MathWeb" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MathWeb - Calculadoras Matemáticas" />
     <meta
-      property="twitter:description"
+      name="twitter:description"
       content="Calculadora online gratuita com múltiplas ferramentas matemáticas: triângulo retângulo, conversor de temperatura, lei dos cossenos, lei dos senos, função do segundo grau e expressões matemáticas."
     />
     <meta
-      property="twitter:image"
-      content="https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/icon-512x512.png"
+      name="twitter:image"
+      content="https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/icon-512x512.svg"
     />
 
-    <!-- Icons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#007bff" />
+    <!-- Performance Optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json" />
-
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Structured Data / JSON-LD -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -127,7 +98,7 @@
           "Função do Segundo Grau",
           "Expressões Matemáticas"
         ],
-        "screenshot": "https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/icon-512x512.png",
+        "screenshot": "https://mathweb-dxipve290-gersons-projects-67503b81.vercel.app/icon-512x512.svg",
         "softwareVersion": "2.0",
         "datePublished": "2024-07-26",
         "dateModified": "2024-07-26",
@@ -196,9 +167,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- Service Worker Registration -->
     <script>
       if ("serviceWorker" in navigator) {
@@ -206,10 +174,10 @@
           navigator.serviceWorker
             .register("/sw.js")
             .then((registration) => {
-              console.log("SW registrado: ", registration);
+              console.log("SW registered: ", registration);
             })
             .catch((registrationError) => {
-              console.log("SW falhou: ", registrationError);
+              console.log("SW registration failed: ", registrationError);
             });
         });
       }

@@ -1,0 +1,27 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007bff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0056b3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#grad1)" stroke="#ffffff" stroke-width="8"/>
+  
+  <!-- Math symbols -->
+  <text x="256" y="180" font-family="Arial, sans-serif" font-size="120" font-weight="bold" text-anchor="middle" fill="white">∑</text>
+  <text x="256" y="320" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="white">π</text>
+  
+  <!-- Small math symbols around -->
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="50" text-anchor="middle" fill="white">√</text>
+  <text x="412" y="160" font-family="Arial, sans-serif" font-size="50" text-anchor="middle" fill="white">∞</text>
+  <text x="100" y="380" font-family="Arial, sans-serif" font-size="50" text-anchor="middle" fill="white">∫</text>
+  <text x="412" y="380" font-family="Arial, sans-serif" font-size="50" text-anchor="middle" fill="white">θ</text>
+  
+  <!-- Additional symbols -->
+  <text x="180" y="100" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="white">α</text>
+  <text x="332" y="100" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="white">β</text>
+  <text x="180" y="420" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="white">γ</text>
+  <text x="332" y="420" font-family="Arial, sans-serif" font-size="40" text-anchor="middle" fill="white">δ</text>
+</svg> 
