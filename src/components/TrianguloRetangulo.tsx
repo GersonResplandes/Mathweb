@@ -89,17 +89,11 @@ const TrianguloRetangulo: React.FC = () => {
       return "N/A";
     }
 
-    console.log("Passo encontrado:", passoResultados);
-    console.log("Procurando por:", texto);
-
     // Remover tags HTML e quebrar em linhas
     const textoLimpo = passoResultados
       .replace(/<br>/g, "\n")
       .replace(/<[^>]*>/g, "");
-    console.log("Texto limpo:", textoLimpo);
-
     const linhas = textoLimpo.split("\n");
-    console.log("Linhas:", linhas);
 
     // Procurar a linha que contém o texto desejado
     const linha = linhas.find((l) => l.includes(texto));
@@ -108,14 +102,19 @@ const TrianguloRetangulo: React.FC = () => {
       return "N/A";
     }
 
-    console.log("Linha encontrada:", linha);
+    // Extrair o valor após o "=" de forma mais simples
+    const partes = linha.split("=");
+    if (partes.length >= 2) {
+      // Pegar tudo após o "=" e antes do próximo "•" ou fim da linha
+      let valor = partes[1].trim();
+      // Remover qualquer "•" que possa estar no início
+      valor = valor.replace(/^•\s*/, "");
+      // Remover qualquer texto após o valor (como "• Ângulo β")
+      valor = valor.split("•")[0].trim();
+      return valor;
+    }
 
-    // Extrair o valor após o "="
-    const match = linha.match(/=\s*([^•\n]+)/);
-    const resultado = match ? match[1].trim() : "N/A";
-    console.log("Resultado extraído:", resultado);
-
-    return resultado;
+    return "N/A";
   };
 
   return (
