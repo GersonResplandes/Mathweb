@@ -733,6 +733,17 @@ export const formatarFracao = (fracao: string): string => {
             </span>`;
   }
 
+  // Se tem raiz quadrada no denominador
+  if (denominador.includes("√")) {
+    const raiz = denominador.replace("√", "");
+    return `<span class="fracao-raiz-denominador">
+              <span class="numerador">${numerador}</span>
+              <span class="fracao-linha"></span>
+              <span class="raiz-simbolo">√</span>
+              <span class="raiz-valor">${raiz}</span>
+            </span>`;
+  }
+
   // Fração simples
   return `<span class="fracao">
             <span class="numerador">${numerador}</span>

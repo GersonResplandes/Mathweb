@@ -224,19 +224,31 @@ const TrianguloRetangulo: React.FC = () => {
                       <div className="d-flex justify-content-between">
                         <span>Ângulo α:</span>
                         <strong className="text-primary">
-                          {resultado.passos
-                            .find((p) => p.includes("Ângulo α ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {(() => {
+                            const passo = resultado.passos.find((p) =>
+                              p.includes("Ângulo α =")
+                            );
+                            if (passo) {
+                              const match = passo.match(/Ângulo α = ([^<]+)/);
+                              return match ? match[1].trim() : "N/A";
+                            }
+                            return "N/A";
+                          })()}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Ângulo β:</span>
                         <strong className="text-primary">
-                          {resultado.passos
-                            .find((p) => p.includes("Ângulo β ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {(() => {
+                            const passo = resultado.passos.find((p) =>
+                              p.includes("Ângulo β =")
+                            );
+                            if (passo) {
+                              const match = passo.match(/Ângulo β = ([^<]+)/);
+                              return match ? match[1].trim() : "N/A";
+                            }
+                            return "N/A";
+                          })()}
                         </strong>
                       </div>
                     </div>
@@ -244,28 +256,50 @@ const TrianguloRetangulo: React.FC = () => {
                       <div className="d-flex justify-content-between">
                         <span>Adjacente:</span>
                         <strong className="text-success">
-                          {resultado.passos
-                            .find((p) => p.includes("Cateto Adjacente ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {(() => {
+                            const passo = resultado.passos.find((p) =>
+                              p.includes("Cateto Adjacente =")
+                            );
+                            if (passo) {
+                              const match = passo.match(
+                                /Cateto Adjacente = ([^<]+)/
+                              );
+                              return match ? match[1].trim() : "N/A";
+                            }
+                            return "N/A";
+                          })()}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Oposto:</span>
                         <strong className="text-success">
-                          {resultado.passos
-                            .find((p) => p.includes("Cateto Oposto ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {(() => {
+                            const passo = resultado.passos.find((p) =>
+                              p.includes("Cateto Oposto =")
+                            );
+                            if (passo) {
+                              const match = passo.match(
+                                /Cateto Oposto = ([^<]+)/
+                              );
+                              return match ? match[1].trim() : "N/A";
+                            }
+                            return "N/A";
+                          })()}
                         </strong>
                       </div>
                       <div className="d-flex justify-content-between">
                         <span>Hipotenusa:</span>
                         <strong className="text-success">
-                          {resultado.passos
-                            .find((p) => p.includes("Hipotenusa ="))
-                            ?.split("=")[1]
-                            ?.trim() || "N/A"}
+                          {(() => {
+                            const passo = resultado.passos.find((p) =>
+                              p.includes("Hipotenusa =")
+                            );
+                            if (passo) {
+                              const match = passo.match(/Hipotenusa = ([^<]+)/);
+                              return match ? match[1].trim() : "N/A";
+                            }
+                            return "N/A";
+                          })()}
                         </strong>
                       </div>
                     </div>
