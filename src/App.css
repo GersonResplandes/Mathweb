@@ -319,3 +319,211 @@
     padding: 15px;
   }
 }
+
+/* Estilos para frações trigonométricas */
+.fracao {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 2px;
+  font-family: "Times New Roman", serif;
+  font-weight: bold;
+}
+
+.fracao .numerador {
+  display: block;
+  padding: 2px 4px;
+  border-bottom: 1px solid #333;
+  line-height: 1.2;
+  font-size: 1.1em;
+}
+
+.fracao .fracao-linha {
+  display: block;
+  height: 1px;
+  background-color: #333;
+  margin: 1px 0;
+}
+
+.fracao .denominador {
+  display: block;
+  padding: 2px 4px;
+  line-height: 1.2;
+  font-size: 1.1em;
+}
+
+/* Fração com raiz quadrada */
+.fracao-raiz {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 2px;
+  font-family: "Times New Roman", serif;
+  font-weight: bold;
+  position: relative;
+}
+
+.fracao-raiz .raiz-simbolo {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.fracao-raiz .raiz-valor {
+  display: inline-block;
+  padding: 2px 4px;
+  border-bottom: 1px solid #333;
+  line-height: 1.2;
+  font-size: 1.1em;
+  margin-left: 8px;
+}
+
+.fracao-raiz .fracao-linha {
+  display: block;
+  height: 1px;
+  background-color: #333;
+  margin: 1px 0;
+  margin-left: 8px;
+  margin-right: 4px;
+}
+
+.fracao-raiz .denominador {
+  display: block;
+  padding: 2px 4px;
+  line-height: 1.2;
+  font-size: 1.1em;
+  margin-left: 8px;
+}
+
+/* Fração com raiz no denominador */
+.fracao-raiz-denominador {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 2px;
+  font-family: "Times New Roman", serif;
+  font-weight: bold;
+  position: relative;
+}
+
+.fracao-raiz-denominador .numerador {
+  display: block;
+  padding: 2px 4px;
+  border-bottom: 1px solid #333;
+  line-height: 1.2;
+  font-size: 1.1em;
+}
+
+.fracao-raiz-denominador .fracao-linha {
+  display: block;
+  height: 1px;
+  background-color: #333;
+  margin: 1px 0;
+}
+
+.fracao-raiz-denominador .raiz-simbolo {
+  position: absolute;
+  bottom: -8px;
+  left: 4px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.fracao-raiz-denominador .raiz-valor {
+  display: inline-block;
+  padding: 2px 4px;
+  line-height: 1.2;
+  font-size: 1.1em;
+  margin-left: 8px;
+}
+
+/* Fração com raiz em ambos (numerador e denominador) */
+.fracao-raiz-dupla {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 2px;
+  font-family: "Times New Roman", serif;
+  font-weight: bold;
+  position: relative;
+}
+
+.fracao-raiz-dupla .raiz-simbolo-num {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.fracao-raiz-dupla .raiz-valor-num {
+  display: inline-block;
+  padding: 2px 4px;
+  border-bottom: 1px solid #333;
+  line-height: 1.2;
+  font-size: 1.1em;
+  margin-left: 8px;
+}
+
+.fracao-raiz-dupla .fracao-linha {
+  display: block;
+  height: 1px;
+  background-color: #333;
+  margin: 1px 0;
+  margin-left: 8px;
+  margin-right: 4px;
+}
+
+.fracao-raiz-dupla .raiz-simbolo-den {
+  position: absolute;
+  bottom: -8px;
+  left: 4px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.fracao-raiz-dupla .raiz-valor-den {
+  display: inline-block;
+  padding: 2px 4px;
+  line-height: 1.2;
+  font-size: 1.1em;
+  margin-left: 8px;
+}
+
+/* Melhorias para exibição de valores trigonométricos */
+.valor-trigonometrico {
+  display: inline-block;
+  margin: 0 2px;
+  font-family: "Times New Roman", serif;
+}
+
+.valor-trigonometrico.decimal {
+  font-family: "Courier New", monospace;
+  font-weight: normal;
+}
+
+/* Responsividade para frações */
+@media (max-width: 768px) {
+  .fracao,
+  .fracao-raiz,
+  .fracao-raiz-denominador,
+  .fracao-raiz-dupla {
+    font-size: 0.9em;
+  }
+
+  .fracao .numerador,
+  .fracao .denominador,
+  .fracao-raiz .raiz-valor,
+  .fracao-raiz .denominador {
+    padding: 1px 3px;
+    font-size: 0.9em;
+  }
+
+  .fracao-raiz .raiz-simbolo {
+    top: -6px;
+    left: -6px;
+    font-size: 1em;
+  }
+}

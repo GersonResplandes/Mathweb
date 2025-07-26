@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Form, Button, Card, Alert, Row, Col } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Card,
+  Alert,
+  Row,
+  Col,
+  FormCheck,
+} from "react-bootstrap";
 import { calcularTrianguloRetangulo } from "../utils/mathUtils";
 
 const TrianguloRetangulo: React.FC = () => {
@@ -9,6 +17,7 @@ const TrianguloRetangulo: React.FC = () => {
     oposto: "",
     hipotenusa: "",
   });
+  const [usarFracao, setUsarFracao] = useState(true);
   const [resultado, setResultado] = useState<{
     resultado: string;
     passos: string[];
@@ -48,6 +57,7 @@ const TrianguloRetangulo: React.FC = () => {
         hipotenusa: formData.hipotenusa
           ? parseFloat(formData.hipotenusa)
           : undefined,
+        usarFracao: usarFracao,
       };
 
       const resultadoCalculo = calcularTrianguloRetangulo(dados);
@@ -80,6 +90,27 @@ const TrianguloRetangulo: React.FC = () => {
             Forneça pelo menos dois valores para calcular os demais usando
             trigonometria.
           </p>
+
+          {/* Opção de formato */}
+          <div className="mb-4 p-3 bg-light rounded">
+            <FormCheck
+              type="switch"
+              id="usar-fracao"
+              label={
+                <span>
+                  <strong>📊 Exibir frações trigonométricas exatas</strong>
+                  <br />
+                  <small className="text-muted">
+                    {usarFracao
+                      ? "Ex: sen(30°) = 1/2, cos(30°) = √3/2"
+                      : "Ex: sen(30°) = 0.5, cos(30°) = 0.8660"}
+                  </small>
+                </span>
+              }
+              checked={usarFracao}
+              onChange={(e) => setUsarFracao(e.target.checked)}
+            />
+          </div>
 
           <Form onSubmit={handleSubmit}>
             <Row>
@@ -174,9 +205,11 @@ const TrianguloRetangulo: React.FC = () => {
                   <h6 className="text-success mb-2">📝 Passos do Cálculo:</h6>
                   <div className="passos-container">
                     {resultado.passos.map((passo, index) => (
-                      <div key={index} className="passo-calculo">
-                        {passo}
-                      </div>
+                      <div
+                        key={index}
+                        className="passo-calculo"
+                        dangerouslySetInnerHTML={{ __html: passo }}
+                      ></div>
                     ))}
                   </div>
                 </div>
@@ -267,6 +300,7 @@ const TrianguloRetangulo: React.FC = () => {
                 <li>• Ângulos devem estar em graus</li>
                 <li>• Valores negativos não são aceitos</li>
                 <li>• Use ponto para decimais</li>
+                <li>• Ative frações para valores exatos</li>
               </ul>
             </Col>
           </Row>

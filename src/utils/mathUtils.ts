@@ -43,8 +43,9 @@ export const calcularTrianguloRetangulo = (dados: {
   adjacente?: number;
   oposto?: number;
   hipotenusa?: number;
+  usarFracao?: boolean;
 }): { resultado: string; passos: string[] } => {
-  const { angulo, adjacente, oposto, hipotenusa } = dados;
+  const { angulo, adjacente, oposto, hipotenusa, usarFracao = true } = dados;
   const passos: string[] = [];
   let resultado = "";
 
@@ -95,6 +96,19 @@ export const calcularTrianguloRetangulo = (dados: {
     const hipotenusaCalculada = adjacente! / Math.cos(anguloRad);
     const anguloComplementar = 90 - angulo!;
 
+    const tangenteFormatada = formatarValorTrigonometrico(
+      Math.tan(anguloRad),
+      angulo!,
+      "tangente",
+      usarFracao
+    );
+    const cossenoFormatado = formatarValorTrigonometrico(
+      Math.cos(anguloRad),
+      angulo!,
+      "cosseno",
+      usarFracao
+    );
+
     resultado = `✅ Triângulo calculado com sucesso!`;
     passos.push(
       `📐 Dados fornecidos: Ângulo = ${angulo}°, Adjacente = ${adjacente}`
@@ -102,16 +116,12 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`🔢 Cálculo do cateto oposto:`);
     passos.push(`   tg(${angulo}°) = oposto / ${adjacente}`);
     passos.push(`   oposto = ${adjacente} × tg(${angulo}°)`);
-    passos.push(
-      `   oposto = ${adjacente} × ${formatarNumero(Math.tan(anguloRad))}`
-    );
+    passos.push(`   oposto = ${adjacente} × ${tangenteFormatada}`);
     passos.push(`   oposto = ${formatarNumero(opostoCalculado)}`);
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(`   cos(${angulo}°) = ${adjacente} / hipotenusa`);
     passos.push(`   hipotenusa = ${adjacente} / cos(${angulo}°)`);
-    passos.push(
-      `   hipotenusa = ${adjacente} / ${formatarNumero(Math.cos(anguloRad))}`
-    );
+    passos.push(`   hipotenusa = ${adjacente} / ${cossenoFormatado}`);
     passos.push(`   hipotenusa = ${formatarNumero(hipotenusaCalculada)}`);
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
@@ -128,21 +138,30 @@ export const calcularTrianguloRetangulo = (dados: {
     const hipotenusaCalculada = oposto! / Math.sin(anguloRad);
     const anguloComplementar = 90 - angulo!;
 
+    const tangenteFormatada = formatarValorTrigonometrico(
+      Math.tan(anguloRad),
+      angulo!,
+      "tangente",
+      usarFracao
+    );
+    const senoFormatado = formatarValorTrigonometrico(
+      Math.sin(anguloRad),
+      angulo!,
+      "seno",
+      usarFracao
+    );
+
     resultado = `✅ Triângulo calculado com sucesso!`;
     passos.push(`📐 Dados fornecidos: Ângulo = ${angulo}°, Oposto = ${oposto}`);
     passos.push(`🔢 Cálculo do cateto adjacente:`);
     passos.push(`   tg(${angulo}°) = ${oposto} / adjacente`);
     passos.push(`   adjacente = ${oposto} / tg(${angulo}°)`);
-    passos.push(
-      `   adjacente = ${oposto} / ${formatarNumero(Math.tan(anguloRad))}`
-    );
+    passos.push(`   adjacente = ${oposto} / ${tangenteFormatada}`);
     passos.push(`   adjacente = ${formatarNumero(adjacenteCalculado)}`);
     passos.push(`🔢 Cálculo da hipotenusa:`);
     passos.push(`   sen(${angulo}°) = ${oposto} / hipotenusa`);
     passos.push(`   hipotenusa = ${oposto} / sen(${angulo}°)`);
-    passos.push(
-      `   hipotenusa = ${oposto} / ${formatarNumero(Math.sin(anguloRad))}`
-    );
+    passos.push(`   hipotenusa = ${oposto} / ${senoFormatado}`);
     passos.push(`   hipotenusa = ${formatarNumero(hipotenusaCalculada)}`);
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
@@ -190,6 +209,13 @@ export const calcularTrianguloRetangulo = (dados: {
       Math.acos(adjacente! / hipotenusa!) * (180 / Math.PI);
     const anguloComplementar = 90 - anguloCalculado;
 
+    const cossenoFormatado = formatarValorTrigonometrico(
+      adjacente! / hipotenusa!,
+      anguloCalculado,
+      "cosseno",
+      usarFracao
+    );
+
     resultado = `✅ Triângulo calculado com sucesso!`;
     passos.push(
       `📐 Dados fornecidos: Adjacente = ${adjacente}, Hipotenusa = ${hipotenusa}`
@@ -201,7 +227,9 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`   oposto = √${hipotenusa! ** 2 - adjacente! ** 2}`);
     passos.push(`   oposto = ${formatarNumero(opostoCalculado)}`);
     passos.push(`🔢 Cálculo do ângulo α:`);
-    passos.push(`   cos(α) = ${adjacente} / ${hipotenusa}`);
+    passos.push(
+      `   cos(α) = ${adjacente} / ${hipotenusa} = ${cossenoFormatado}`
+    );
     passos.push(`   α = cos⁻¹(${adjacente} / ${hipotenusa})`);
     passos.push(`   α = cos⁻¹(${formatarNumero(adjacente! / hipotenusa!)})`);
     passos.push(`   α = ${formatarNumero(anguloCalculado)}°`);
@@ -219,6 +247,13 @@ export const calcularTrianguloRetangulo = (dados: {
     const anguloCalculado = Math.asin(oposto! / hipotenusa!) * (180 / Math.PI);
     const anguloComplementar = 90 - anguloCalculado;
 
+    const senoFormatado = formatarValorTrigonometrico(
+      oposto! / hipotenusa!,
+      anguloCalculado,
+      "seno",
+      usarFracao
+    );
+
     resultado = `✅ Triângulo calculado com sucesso!`;
     passos.push(
       `📐 Dados fornecidos: Oposto = ${oposto}, Hipotenusa = ${hipotenusa}`
@@ -230,7 +265,7 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`   adjacente = √${hipotenusa! ** 2 - oposto! ** 2}`);
     passos.push(`   adjacente = ${formatarNumero(adjacenteCalculado)}`);
     passos.push(`🔢 Cálculo do ângulo α:`);
-    passos.push(`   sen(α) = ${oposto} / ${hipotenusa}`);
+    passos.push(`   sen(α) = ${oposto} / ${hipotenusa} = ${senoFormatado}`);
     passos.push(`   α = sen⁻¹(${oposto} / ${hipotenusa})`);
     passos.push(`   α = sen⁻¹(${formatarNumero(oposto! / hipotenusa!)})`);
     passos.push(`   α = ${formatarNumero(anguloCalculado)}°`);
@@ -251,6 +286,19 @@ export const calcularTrianguloRetangulo = (dados: {
     const adjacenteCalculado = hipotenusa! * Math.cos(anguloRad);
     const anguloComplementar = 90 - angulo!;
 
+    const senoFormatado = formatarValorTrigonometrico(
+      Math.sin(anguloRad),
+      angulo!,
+      "seno",
+      usarFracao
+    );
+    const cossenoFormatado = formatarValorTrigonometrico(
+      Math.cos(anguloRad),
+      angulo!,
+      "cosseno",
+      usarFracao
+    );
+
     resultado = `✅ Triângulo calculado com sucesso!`;
     passos.push(
       `📐 Dados fornecidos: Ângulo = ${angulo}°, Hipotenusa = ${hipotenusa}`
@@ -258,16 +306,12 @@ export const calcularTrianguloRetangulo = (dados: {
     passos.push(`🔢 Cálculo do cateto oposto:`);
     passos.push(`   sen(${angulo}°) = oposto / ${hipotenusa}`);
     passos.push(`   oposto = ${hipotenusa} × sen(${angulo}°)`);
-    passos.push(
-      `   oposto = ${hipotenusa} × ${formatarNumero(Math.sin(anguloRad))}`
-    );
+    passos.push(`   oposto = ${hipotenusa} × ${senoFormatado}`);
     passos.push(`   oposto = ${formatarNumero(opostoCalculado)}`);
     passos.push(`🔢 Cálculo do cateto adjacente:`);
     passos.push(`   cos(${angulo}°) = adjacente / ${hipotenusa}`);
     passos.push(`   adjacente = ${hipotenusa} × cos(${angulo}°)`);
-    passos.push(
-      `   adjacente = ${hipotenusa} × ${formatarNumero(Math.cos(anguloRad))}`
-    );
+    passos.push(`   adjacente = ${hipotenusa} × ${cossenoFormatado}`);
     passos.push(`   adjacente = ${formatarNumero(adjacenteCalculado)}`);
     passos.push(`📊 Resultados finais:`);
     passos.push(`   • Ângulo α = ${angulo}°`);
@@ -419,4 +463,98 @@ export const calcularFuncaoSegundoGrau = (
   resultado = `Raízes: x' = ${formatarNumero(x1)}, x'' = ${formatarNumero(x2)}`;
 
   return { resultado, passos, raizes, vertice };
+};
+
+// Tabela de valores trigonométricos exatos para ângulos comuns
+const VALORES_TRIGONOMETRICOS_EXATOS = {
+  0: { seno: "0", cosseno: "1", tangente: "0" },
+  30: { seno: "1/2", cosseno: "√3/2", tangente: "1/√3" },
+  45: { seno: "√2/2", cosseno: "√2/2", tangente: "1" },
+  60: { seno: "√3/2", cosseno: "1/2", tangente: "√3" },
+  90: { seno: "1", cosseno: "0", tangente: "∞" },
+  120: { seno: "√3/2", cosseno: "-1/2", tangente: "-√3" },
+  135: { seno: "√2/2", cosseno: "-√2/2", tangente: "-1" },
+  150: { seno: "1/2", cosseno: "-√3/2", tangente: "-1/√3" },
+  180: { seno: "0", cosseno: "-1", tangente: "0" },
+  210: { seno: "-1/2", cosseno: "-√3/2", tangente: "1/√3" },
+  225: { seno: "-√2/2", cosseno: "-√2/2", tangente: "1" },
+  240: { seno: "-√3/2", cosseno: "-1/2", tangente: "√3" },
+  270: { seno: "-1", cosseno: "0", tangente: "∞" },
+  300: { seno: "-√3/2", cosseno: "1/2", tangente: "-√3" },
+  315: { seno: "-√2/2", cosseno: "√2/2", tangente: "-1" },
+  330: { seno: "-1/2", cosseno: "√3/2", tangente: "-1/√3" },
+  360: { seno: "0", cosseno: "1", tangente: "0" },
+};
+
+// Função para obter valor trigonométrico exato
+export const getValorTrigonometricoExato = (
+  angulo: number,
+  tipo: "seno" | "cosseno" | "tangente"
+): string | null => {
+  // Normalizar ângulo para 0-360
+  const anguloNormalizado = ((angulo % 360) + 360) % 360;
+
+  // Verificar se é um ângulo com valor exato conhecido
+  if (VALORES_TRIGONOMETRICOS_EXATOS[anguloNormalizado]) {
+    return VALORES_TRIGONOMETRICOS_EXATOS[anguloNormalizado][tipo];
+  }
+
+  // Verificar ângulos complementares (90 - angulo)
+  const complementar = 90 - anguloNormalizado;
+  if (VALORES_TRIGONOMETRICOS_EXATOS[complementar]) {
+    switch (tipo) {
+      case "seno":
+        return VALORES_TRIGONOMETRICOS_EXATOS[complementar].cosseno;
+      case "cosseno":
+        return VALORES_TRIGONOMETRICOS_EXATOS[complementar].seno;
+      case "tangente":
+        return VALORES_TRIGONOMETRICOS_EXATOS[complementar].tangente === "∞"
+          ? "∞"
+          : `1/${VALORES_TRIGONOMETRICOS_EXATOS[complementar].tangente}`;
+    }
+  }
+
+  return null;
+};
+
+// Função para formatar fração com CSS
+export const formatarFracao = (fracao: string): string => {
+  if (!fracao.includes("/")) return fracao;
+
+  const [numerador, denominador] = fracao.split("/");
+
+  // Se tem raiz quadrada no numerador
+  if (numerador.includes("√")) {
+    const raiz = numerador.replace("√", "");
+    return `<span class="fracao-raiz">
+              <span class="raiz-simbolo">√</span>
+              <span class="raiz-valor">${raiz}</span>
+              <span class="fracao-linha"></span>
+              <span class="denominador">${denominador}</span>
+            </span>`;
+  }
+
+  // Fração simples
+  return `<span class="fracao">
+            <span class="numerador">${numerador}</span>
+            <span class="fracao-linha"></span>
+            <span class="denominador">${denominador}</span>
+          </span>`;
+};
+
+// Função para formatar valor trigonométrico
+export const formatarValorTrigonometrico = (
+  valor: number,
+  angulo: number,
+  tipo: "seno" | "cosseno" | "tangente",
+  usarFracao: boolean = true
+): string => {
+  if (usarFracao) {
+    const valorExato = getValorTrigonometricoExato(angulo, tipo);
+    if (valorExato) {
+      return formatarFracao(valorExato);
+    }
+  }
+
+  return formatarNumero(valor);
 };
