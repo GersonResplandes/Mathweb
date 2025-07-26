@@ -1,0 +1,219 @@
+import React, { useState } from "react";
+import { Form, Button, Card, Alert, Row, Col } from "react-bootstrap";
+import { calcularTrianguloRetangulo } from "../utils/mathUtils";
+
+const TrianguloRetangulo: React.FC = () => {
+  const [formData, setFormData] = useState({
+    angulo: "",
+    adjacente: "",
+    oposto: "",
+    hipotenusa: "",
+  });
+  const [resultado, setResultado] = useState<{
+    resultado: string;
+    passos: string[];
+  } | null>(null);
+  const [erro, setErro] = useState<string>("");
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    setErro("");
+    setResultado(null);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Verificar se pelo menos dois valores foram fornecidos
+    const valoresFornecidos = Object.values(formData).filter(
+      (val) => val !== ""
+    ).length;
+
+    if (valoresFornecidos < 2) {
+      setErro("Por favor, forneça pelo menos dois valores para calcular.");
+      return;
+    }
+
+    try {
+      const dados = {
+        angulo: formData.angulo ? parseFloat(formData.angulo) : undefined,
+        adjacente: formData.adjacente
+          ? parseFloat(formData.adjacente)
+          : undefined,
+        oposto: formData.oposto ? parseFloat(formData.oposto) : undefined,
+        hipotenusa: formData.hipotenusa
+          ? parseFloat(formData.hipotenusa)
+          : undefined,
+      };
+
+      const resultadoCalculo = calcularTrianguloRetangulo(dados);
+      setResultado(resultadoCalculo);
+      setErro("");
+    } catch (error) {
+      setErro("Erro ao calcular. Verifique os valores inseridos.");
+    }
+  };
+
+  const limparFormulario = () => {
+    setFormData({
+      angulo: "",
+      adjacente: "",
+      oposto: "",
+      hipotenusa: "",
+    });
+    setResultado(null);
+    setErro("");
+  };
+
+  return (
+    <div className="fade-in">
+      <Card className="form-container">
+        <Card.Header className="bg-primary text-white">
+          <h4 className="mb-0">📐 Triângulo Retângulo</h4>
+        </Card.Header>
+        <Card.Body>
+          <p className="text-muted mb-4">
+            Forneça pelo menos dois valores para calcular os demais usando
+            trigonometria.
+          </p>
+
+          <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="angulo">Ângulo α (graus)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    id="angulo"
+                    name="angulo"
+                    value={formData.angulo}
+                    onChange={handleInputChange}
+                    placeholder="Ex: 30"
+                    step="any"
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="adjacente">Cateto Adjacente</Form.Label>
+                  <Form.Control
+                    type="number"
+                    id="adjacente"
+                    name="adjacente"
+                    value={formData.adjacente}
+                    onChange={handleInputChange}
+                    placeholder="Ex: 5"
+                    step="any"
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col md={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="oposto">Cateto Oposto</Form.Label>
+                  <Form.Control
+                    type="number"
+                    id="oposto"
+                    name="oposto"
+                    value={formData.oposto}
+                    onChange={handleInputChange}
+                    placeholder="Ex: 3"
+                    step="any"
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label htmlFor="hipotenusa">Hipotenusa</Form.Label>
+                  <Form.Control
+                    type="number"
+                    id="hipotenusa"
+                    name="hipotenusa"
+                    value={formData.hipotenusa}
+                    onChange={handleInputChange}
+                    placeholder="Ex: 5.83"
+                    step="any"
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <div className="d-flex gap-2">
+              <Button type="submit" variant="primary" className="btn-custom">
+                🧮 Calcular
+              </Button>
+              <Button
+                type="button"
+                variant="outline-secondary"
+                onClick={limparFormulario}
+              >
+                🔄 Limpar
+              </Button>
+            </div>
+          </Form>
+
+          {erro && (
+            <Alert variant="danger" className="mt-3">
+              ⚠️ {erro}
+            </Alert>
+          )}
+
+          {resultado && (
+            <div className="resultado-container mt-4">
+              <h5 className="text-primary mb-3">📊 Resultado</h5>
+              <p className="fw-bold">{resultado.resultado}</p>
+
+              {resultado.passos.length > 0 && (
+                <div className="mt-3">
+                  <h6 className="text-success mb-2">📝 Passos do Cálculo:</h6>
+                  {resultado.passos.map((passo, index) => (
+                    <div key={index} className="passo-calculo">
+                      {passo}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </Card.Body>
+      </Card>
+
+      {/* Informações adicionais */}
+      <Card className="mt-4">
+        <Card.Header className="bg-info text-white">
+          <h5 className="mb-0">ℹ️ Informações</h5>
+        </Card.Header>
+        <Card.Body>
+          <Row>
+            <Col md={6}>
+              <h6>📐 Fórmulas Utilizadas:</h6>
+              <ul className="list-unstyled">
+                <li>• Seno: sin(θ) = oposto / hipotenusa</li>
+                <li>• Cosseno: cos(θ) = adjacente / hipotenusa</li>
+                <li>• Tangente: tg(θ) = oposto / adjacente</li>
+                <li>• Pitágoras: a² + b² = c²</li>
+              </ul>
+            </Col>
+            <Col md={6}>
+              <h6>🎯 Dicas:</h6>
+              <ul className="list-unstyled">
+                <li>• Forneça pelo menos 2 valores</li>
+                <li>• Ângulos devem estar em graus</li>
+                <li>• Valores negativos não são aceitos</li>
+                <li>• Use ponto para decimais</li>
+              </ul>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
+    </div>
+  );
+};
+
+export default TrianguloRetangulo;
