@@ -76,7 +76,17 @@ const TrianguloRetangulo: React.FC = () => {
       hipotenusa: "",
     });
     setResultado(null);
-    setErro("");
+  };
+
+  // Função para extrair valores dos passos HTML
+  const extrairValorDoPasso = (passos: string[], texto: string): string => {
+    const passo = passos.find((p) => p.includes(texto));
+    if (!passo) return "N/A";
+
+    // Remover tags HTML e extrair o valor
+    const textoLimpo = passo.replace(/<br>/g, " ").replace(/<[^>]*>/g, "");
+    const match = textoLimpo.match(new RegExp(`${texto}\\s*=\\s*([^\\s]+)`));
+    return match ? match[1] : "N/A";
   };
 
   return (
